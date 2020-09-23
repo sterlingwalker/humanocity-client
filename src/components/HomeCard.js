@@ -14,6 +14,9 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+    width: 140,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
 });
 
@@ -28,7 +31,6 @@ export default function HomeCard(props) {
           image={props.icon}
           title={props.title}
         />
-        <hr/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.title}
