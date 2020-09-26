@@ -10,6 +10,8 @@ import { useHistory } from 'react-router-dom'
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    textAlign: 'center',
+    boxShadow: '0 3px 5px 4px #DDD'
   },
   media: {
     height: 140,
@@ -22,7 +24,6 @@ const useStyles = makeStyles({
 export default function HomeCard(props) {
   const classes = useStyles();
   let history = useHistory();
-
 
   return (
     <Card className={classes.root} onClick={() => history.push(props.url)}>
