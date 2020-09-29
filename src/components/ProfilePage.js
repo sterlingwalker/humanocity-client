@@ -71,14 +71,14 @@ export default function ProfilePage(props) {
       </Card>
       <form className={classes.form} noValidate autoComplete="off">
         <div>
-          <TextField id="outlined-helperText" label="Street Address 1" variant="outlined" defaultValue={props.streetAddress1} required/>
-          <TextField id="outlined-helperText" label="Street Address 2" variant="outlined" defaultValue={props.streetAddress2} />
-          <TextField id="outlined-helperText" label="City" variant="outlined" defaultValue={props.city} required/>
-          <TextField id="outlined-helperText" label="State" variant="outlined" defaultValue={props.state} required />
-          <TextField id="outlined-helperText" label="ZIP Code" variant="outlined" defaultValue={props.zip} required />
-          <TextField id="outlined-helperText" label="Phone Number" variant="outlined" defaultValue={props.phone} required />
-          <TextField id="outlined-helperText" label="Emergency Contact Name" variant="outlined" defaultValue={props.emContactName} />
-          <TextField id="outlined-helperText" label="Emergency Contact Number" variant="outlined" defaultValue={props.emContactPhone} />
+          <TextField id="todo?" label="Street Address 1" variant="outlined" defaultValue={props.streetAddress1} required/>
+          <TextField id="todo?" label="Street Address 2" variant="outlined" defaultValue={props.streetAddress2} />
+          <TextField id="todo?" label="City" variant="outlined" defaultValue={props.city} required/>
+          <TextField id="todo?" label="State" variant="outlined" defaultValue={props.state} required />
+          <TextField id="todo?" label="ZIP Code" variant="outlined" defaultValue={props.zip} required />
+          <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={props.phone} required />
+          <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={props.emContactName} />
+          <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={props.emContactPhone} />
         </div>
         <Button variant="contained" color="primary" onClick={()=> alert("TODO!")}>
             Save

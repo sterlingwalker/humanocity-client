@@ -1,9 +1,12 @@
-import React, { useState }from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles'
 import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import EventNote from '@material-ui/icons/Event'
-import PersonPinIcon from '@material-ui/icons/PersonPin'
+import AlarmIcon from '@material-ui/icons/Alarm'
+import GroupIcon from '@material-ui/icons/Group'
+import CommentIcon from '@material-ui/icons/Comment'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
     tab: {
@@ -15,25 +18,28 @@ const useStyles = makeStyles({
   });
 
 const NavigationBar = (props) => {
-    const [value, setValue] = useState(0)
     const classes = useStyles()
+    let history = useHistory();
+
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        history.push(newValue)
       };
 
     return (
     <AppBar className={classes.appbar} position='absolute'>
       <Toolbar >
-          <h3>HUMANOCITY</h3>
+          <h2>HUMANOCITY</h2>
         <Tabs
-        variant="fullWidth"
-        value={value}
+        variant="scrollable"
+        value={props.currentTab}
         onChange={handleChange}
     >
-        <Tab className={classes.tab} icon={<HomeIcon />} tabIndex={0} />
-        <Tab className={classes.tab} icon={<EventNote />} tabIndex={1}/>
-        <Tab className={classes.tab} icon={<PersonPinIcon />} />
+        <Tab className={classes.tab} icon={<HomeIcon />} value='/' tabIndex={0} />
+        <Tab className={classes.tab} icon={<AlarmIcon />} value='' tabIndex={1}/>
+        <Tab className={classes.tab} icon={<GroupIcon />} value='/employees' tabIndex={2}/>
+        <Tab className={classes.tab} icon={<EventNote />} value='' tabIndex={3}/>
+        <Tab className={classes.tab} icon={<CommentIcon />} value='' tabIndex={4}/>
         </Tabs>
         </Toolbar>
       </AppBar>
