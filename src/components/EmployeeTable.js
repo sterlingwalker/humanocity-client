@@ -12,6 +12,7 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
+  import { employees } from '../demo'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -31,27 +32,20 @@ class EmployeeTable extends Component {
 
     render() {
         return (
-   <div>
+   <div style={{marginTop: '70px'}}>
     <MaterialTable
       icons={tableIcons}
       title="All Employees"
       columns={[
-        { title: 'First Name', field: 'firstname' },
-        { title: 'Last Name', field: 'lastname' },
-        { title: 'Employee ID', field: 'id'},
+        { title: 'First Name', field: 'firstName' },
+        { title: 'Last Name', field: 'lastName' },
+        { title: 'Employee ID', field: 'ID'},
         {
           title: 'Department',
           field: 'dept',
-          lookup: { 34: 'Finance', 63: 'Engineering', 12: 'Legal', 44: 'Operations' },
         },
       ]}
-      data={[
-        { firstname: 'John', lastname: 'Baran', id: 84589208423, dept: 63 },
-        { firstname: 'Zara', lastname: 'Pennington', id: 42987349892, dept: 34 },
-        { firstname: 'Eric', lastname: 'Owens', id: 59204824805, dept: 44 },
-        { firstname: 'Ashley', lastname: 'Opec', id: 47890234956, dept: 12 },
-        { firstname: 'Kyle', lastname: 'Richmond', id: 97424379053, dept: 34 },
-      ]}
+      data={employees}
       actions={[
         {
           icon: 'save',
