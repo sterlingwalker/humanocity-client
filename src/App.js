@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import EmployeeTable from './components/EmployeeTable'
-import ProfilePage from './components/ProfilePage'
 import NavigationBar from './components/NavigationBar'
 import HomePage from './components/HomePage'
 import { Route } from 'react-router'
@@ -19,11 +18,9 @@ useEffect(() =>
   return (
     <div>
       <NavigationBar currentTab={tab} />
-      <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}}></div>
       <React.Fragment>
         <Route path='/' exact component={HomePage} />
-        <Route path='/employee' exact component={ProfilePage} />
-        <Route path='/employees' component={EmployeeTable} />
+        <Route path='/all/users' component={EmployeeTable} />
       </React.Fragment>
     </div>
   );
