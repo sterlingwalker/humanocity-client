@@ -29,7 +29,7 @@ const NavigationBar = (props) => {
     return (
     <AppBar className={classes.appbar} position='absolute'>
       <Toolbar >
-          <h3>HUMANOCITY</h3>
+          <h2>HUMANOCITY</h2>
         <Tabs
         variant="scrollable"
         value={props.currentTab}
@@ -37,7 +37,7 @@ const NavigationBar = (props) => {
     >
         <Tab className={classes.tab} icon={<HomeIcon />} value='/' tabIndex={0} />
         <Tab className={classes.tab} icon={<AlarmIcon />} value='' tabIndex={1}/>
-        <Tab className={classes.tab} icon={<GroupIcon />} value='/all/users' tabIndex={2}/>
+        <Tab className={classes.tab} icon={<GroupIcon />} value='/employees' tabIndex={2}/>
         <Tab className={classes.tab} icon={<EventNote />} value='' tabIndex={3}/>
         <Tab className={classes.tab} icon={<CommentIcon />} value='' tabIndex={4}/>
         </Tabs>
