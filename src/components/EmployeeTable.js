@@ -1,4 +1,4 @@
-import React, { Component, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import MaterialTable from 'material-table'
 import { Button } from '@material-ui/core'
 import { 
@@ -13,6 +13,7 @@ import {
   Remove,
   ViewColumn} from '@material-ui/icons'
   import { employees } from '../demo'
+  import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -28,10 +29,15 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
-class EmployeeTable extends Component {
+const EmployeeTable = (props) => {
+  let history = useHistory()
 
-    render() {
-        return (
+const handleClick = (id) => {
+    props.clicked(id)
+    history.push('/employee')
+}
+
+  return (
    <div style={{marginTop: '70px'}}>
     <MaterialTable
       icons={tableIcons}
@@ -50,7 +56,7 @@ class EmployeeTable extends Component {
         {
           icon: 'save',
           tooltip: 'Save User',
-          onClick: (event, rowData) => alert("Coming soon ;) " + rowData.name)
+          onClick: (event, rowData) => handleClick(rowData.ID)
         }
       ]}
       components={{
@@ -70,9 +76,8 @@ class EmployeeTable extends Component {
         actionsColumnIndex: -1
       }}
     />
-            </div>
-        )
-    }
+    </div>
+  )
 }
 
 export default EmployeeTable
