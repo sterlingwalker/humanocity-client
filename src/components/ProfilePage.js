@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { employees } from '../demo';
+import { useHistory } from 'react-router';
 
 const cardWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePage(props) {
   const classes = useStyles();
+  let history = useHistory()
   let currentEmployee = employees.find(employee => employee.ID === props.id);
 
   props = {// TEMPORARY
@@ -54,10 +56,7 @@ export default function ProfilePage(props) {
     emContactName: "name",
     emContactPhone: "123456789"
   }
-  if(currentEmployee === undefined) {
-    currentEmployee = employees[1] //Failsafe for now if the user lands on this page w/o a employee being selected
-  }
-
+  if(currentEmployee !== undefined) {
   return (
     <div className={classes.container}>
       <div>
@@ -104,5 +103,8 @@ export default function ProfilePage(props) {
       </form>
       </div>
     </div>
-  );
+  ) } else {
+    history.push('/employees')
+    return null
+  }
 }
