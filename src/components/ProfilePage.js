@@ -42,67 +42,53 @@ export default function ProfilePage(props) {
   let history = useHistory()
   let currentEmployee = employees.find(employee => employee.ID === props.id);
 
-  props = {// TEMPORARY
-    firstName: "First",
-    lastName: "Last",
-    title: "Title",
-    email: "employee.email@example.com",
-    streetAddress1: "line1",
-    streetAddress2: "line2",
-    city: "city",
-    state: "state",
-    zip: "123456",
-    phone: "987654321",
-    emContactName: "name",
-    emContactPhone: "123456789"
-  }
   if(currentEmployee !== undefined) {
-  return (
-    <div className={classes.container}>
-      <div>
-      <Card className={classes.card}>
-        <CardActionArea>
-          <CardMedia className={classes.media} image="https://via.placeholder.com/300" title={currentEmployee.firstName + "'s Picture"} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {currentEmployee.firstName + " " + currentEmployee.lastName}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {currentEmployee.Position}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {currentEmployee.Email}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary" onClick={()=> window.open("mailto:" + props.title, "_blank")}>
-            Send Email
-          </Button>
-          <Button size="small" color="primary" onClick={()=> navigator.clipboard.writeText(props.email) /* TODO: Show toast or s/t... */}> 
-            Copy Email Address
-          </Button>
-        </CardActions>
-      </Card>
-      </div>
-      <div className={classes.formGroup}>
-      <form className={classes.form} noValidate autoComplete="off">
+    return (
+      <div className={classes.container}>
         <div>
-          <TextField id="todo?" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.Address.Street} required/>
-          <TextField id="todo?" label="Street Address 2" variant="outlined" defaultValue={props.streetAddress2} />
-          <TextField id="todo?" label="City" variant="outlined" defaultValue={currentEmployee.Address.City} required/>
-          <TextField id="todo?" label="State" variant="outlined" defaultValue={currentEmployee.Address.State} required />
-          <TextField id="todo?" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.Address.Zipcode} required />
-          <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={props.phone} required />
-          <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={props.emContactName} />
-          <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={props.emContactPhone} />
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia className={classes.media} image="https://via.placeholder.com/300" title={currentEmployee.firstName + "'s Picture"} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {currentEmployee.firstName + " " + currentEmployee.lastName}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {currentEmployee.Position}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {currentEmployee.Email}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary" onClick={()=> window.open("mailto:" + currentEmployee.Email, "_blank")}>
+                Send Email
+              </Button>
+              <Button size="small" color="primary" onClick={()=> navigator.clipboard.writeText(currentEmployee.Email) /* TODO: Show toast or s/t... */}> 
+                Copy Email Address
+              </Button>
+            </CardActions>
+          </Card>
+          </div>
+          <div className={classes.formGroup}>
+          <form className={classes.form} noValidate autoComplete="off">
+            <div>
+              <TextField id="todo?" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.Address.Street} required/>
+              <TextField id="todo?" label="Street Address 2" variant="outlined" defaultValue={"TODO"} />
+              <TextField id="todo?" label="City" variant="outlined" defaultValue={currentEmployee.Address.City} required/>
+              <TextField id="todo?" label="State" variant="outlined" defaultValue={currentEmployee.Address.State} required />
+              <TextField id="todo?" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.Address.Zipcode} required />
+              <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={"TODO"} required />
+              <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={"TODO"} />
+              <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={"TODO"} />
+            </div>
+            <Button variant="contained" color="primary" onClick={()=> alert("TODO!")}>
+                Save
+            </Button>
+          </form>
         </div>
-        <Button variant="contained" color="primary" onClick={()=> alert("TODO!")}>
-            Save
-        </Button>
-      </form>
       </div>
-    </div>
   ) } else {
     history.push('/employees')
     return null
