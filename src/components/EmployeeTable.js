@@ -38,7 +38,6 @@ const handleClick = (id) => {
 }
 
   return (
-   <div style={{marginTop: '70px'}}>
     <MaterialTable
       icons={tableIcons}
       title="All Employees"
@@ -76,7 +75,6 @@ const handleClick = (id) => {
         actionsColumnIndex: -1
       }}
     />
-    </div>
   )
 }
 
