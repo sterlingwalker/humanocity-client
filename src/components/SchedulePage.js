@@ -28,13 +28,8 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const useStyles = makeStyles({
-  
-});
-
 export default function SchedulePage() {
-  const classes = useStyles();
-  let history = useHistory();
+
   let employeeSchedule = [ // TEMPORARY
       {
         Employee: "First Last",

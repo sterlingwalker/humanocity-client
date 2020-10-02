@@ -19,7 +19,8 @@ export const postAllEmployees = async (employees) => {
         const response = await fetch(apiPath + 'employees', {
             method: 'POST',
             headers: {
-                Accept: 'application/json'
+                Accept: 'application/json', 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(employees)
         })
@@ -48,7 +49,8 @@ export const postEmployeeSchedule = async () => {
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'POST',
             headers: {
-                Accept: 'application/json'
+                Accept: 'application/json', 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(employees)
         })
@@ -77,7 +79,8 @@ export const postEmployeeTimeOffs = async () => {
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'POST',
             headers: {
-                Accept: 'application/json'
+                Accept: 'application/json', 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(employees)
         })
