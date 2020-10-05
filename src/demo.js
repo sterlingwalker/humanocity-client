@@ -86,37 +86,113 @@ export const employees = [
 export const employeeTimeOffs = [
     {
         "employeeId": "2748272849",
-        "totalHours": 0,
-        "hoursRemaining": 0,
-        "availability": 0,
-        "timeOff": 0
+        "totalHours": 160,
+        "hoursRemaining": 80,
+        "availability": {
+            "Monday": "9am-5pm",
+            "Tuesday": "9am-5pm",
+            "Wednesday": "9am-5pm",
+            "Thursday": "9am-5pm",
+            "Friday": "9am-3pm",
+            "Saturday": "",
+            "Sunday": ""
+        },
+        "timeOffs": [
+            {
+                "data": "2020-10-20",
+                "time": "9am-5pm"
+            },
+            {
+                "data": "2020-11-02",
+                "time": "9am-5pm"
+            }
+        ]
     },
     {
         "employeeId": "8393810009",
-        "totalHours": 0,
-        "hoursRemaining": 0,
-        "availability": 0,
-        "timeOff": 0
+        "totalHours": 100,
+        "hoursRemaining": 16,
+        "availability": {
+            "Monday": "9am-5pm",
+            "Tuesday": "",
+            "Wednesday": "9am-5pm",
+            "Thursday": "",
+            "Friday": "9am-3pm",
+            "Saturday": "",
+            "Sunday": ""
+        },
+        "timeOffs": [
+            {
+                "data": "2020-10-21",
+                "time": "9am-5pm"
+            },
+            {
+                "data": "2020-11-04",
+                "time": "9am-12pm"
+            }
+        ]
     },
     {
         "employeeId": "7370821829",
-        "totalHours": 0,
-        "hoursRemaining": 0,
-        "availability": 0,
-        "timeOff": 0
+        "totalHours": 160,
+        "hoursRemaining": 150,
+        "availability": {
+            "Monday": "9am-5pm",
+            "Tuesday": "9am-5pm",
+            "Wednesday": "9am-5pm",
+            "Thursday": "",
+            "Friday": "9am-3pm",
+            "Saturday": "9am-5pm",
+            "Sunday": ""
+        },
+        "timeOffs": [
+            {
+                "data": "2020-11-28",
+                "time": "9am-5pm"
+            }
+        ]
     },
     {
         "employeeId": "1739310389",
-        "totalHours": 0,
+        "totalHours": 50,
         "hoursRemaining": 0,
-        "availability": 0,
-        "timeOff": 0
+        "availability": {
+            "Monday": "",
+            "Tuesday": "9am-5pm",
+            "Wednesday": "",
+            "Thursday": "9am-5pm",
+            "Friday": "",
+            "Saturday": "",
+            "Sunday": ""
+        },
+        "timeOffs": []
     },
     {
         "employeeId": "8826619309",
-        "totalHours": 0,
-        "hoursRemaining": 0,
-        "availability": 0,
-        "timeOff": 0
+        "totalHours": 150,
+        "hoursRemaining": 16,
+        "availability": {
+            "Monday": "9am-5pm",
+            "Tuesday": "",
+            "Wednesday": "9am-5pm",
+            "Thursday": "",
+            "Friday": "9am-3pm",
+            "Saturday": "",
+            "Sunday": ""
+        },
+        "timeOffs": [
+            {
+                "data": "2020-11-09",
+                "time": "9am-5pm"
+            },
+            {
+                "data": "2020-11-11",
+                "time": "9am-5pm"
+            },
+            {
+                "data": "2020-11-13",
+                "time": "9am-5pm"
+            }
+        ]
     },
 ];
