@@ -80,4 +80,43 @@ export const employees = [
         "managerID": "9008332356",
         "dept": "Legal",
     }
-]
+];
+
+
+export const employeeTimeOffs = [
+    {
+        "employeeId": "2748272849",
+        "totalHours": 0,
+        "hoursRemaining": 0,
+        "availability": 0,
+        "timeOff": 0
+    },
+    {
+        "employeeId": "8393810009",
+        "totalHours": 0,
+        "hoursRemaining": 0,
+        "availability": 0,
+        "timeOff": 0
+    },
+    {
+        "employeeId": "7370821829",
+        "totalHours": 0,
+        "hoursRemaining": 0,
+        "availability": 0,
+        "timeOff": 0
+    },
+    {
+        "employeeId": "1739310389",
+        "totalHours": 0,
+        "hoursRemaining": 0,
+        "availability": 0,
+        "timeOff": 0
+    },
+    {
+        "employeeId": "8826619309",
+        "totalHours": 0,
+        "hoursRemaining": 0,
+        "availability": 0,
+        "timeOff": 0
+    },
+];
