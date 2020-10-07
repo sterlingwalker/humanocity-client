@@ -1,6 +1,4 @@
 import React, { forwardRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom'
 import MaterialTable from 'material-table'
 import { 
   AddBox,
