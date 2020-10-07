@@ -17,10 +17,10 @@ export default function HomePage() {
 
   return (
     <div className={classes.cards}>
-      <HomeCard icon={process.env.PUBLIC_URL + 'icons/person.svg'} title="Personal Time Off" description="Employees' requested time off" />
-      <HomeCard icon={process.env.PUBLIC_URL + 'icons/people.svg'} title="User Management" description="Add, remove, and manage employees" url={'/employees'} />
-      <HomeCard icon={process.env.PUBLIC_URL + 'icons/schedule.svg'} title="Schedule" description="Weekly employee schedule"  url={'/schedule'}/>
-      <HomeCard icon={process.env.PUBLIC_URL + 'icons/feedback.svg'} title="Feedback" description="Employee complaints and feedback" />
+      <HomeCard icon={process.env.PUBLIC_URL + '/icons/person.svg'} title="Personal Time Off" description="Employees' requested time off" />
+      <HomeCard icon={process.env.PUBLIC_URL + '/icons/people.svg'} title="User Management" description="Add, remove, and manage employees" url={'/employees'} />
+      <HomeCard icon={process.env.PUBLIC_URL + '/icons/schedule.svg'} title="Schedule" description="Weekly employee schedule"  url={'/schedule'}/>
+      <HomeCard icon={process.env.PUBLIC_URL + '/icons/feedback.svg'} title="Feedback" description="Employee complaints and feedback" />
     </div>
   );
 }
