@@ -2,7 +2,7 @@
     "name": "hr",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://yman.dev/hr",
+    "homepage": "https://hr.yman.dev",
     "dependencies": {
         "@material-ui/core": "^4.11.0",
         "@material-ui/icons": "^4.9.1",
