@@ -14,6 +14,7 @@ import {
   ViewColumn} from '@material-ui/icons'
   import { employees } from '../demo'
   import { useHistory } from 'react-router-dom'
+  import { makeStyles } from '@material-ui/core/styles'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -29,8 +30,21 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
+const useStyles = makeStyles((theme) => ({
+  btn: {
+    textTransform: 'none',
+    marginLeft: 15,
+    color: 'white',
+    backgroundColor: '#1fa127',
+    '&:hover': {
+      backgroundColor: '#1fa127'
+    }
+  }
+}))
+
 const EmployeeTable = (props) => {
   let history = useHistory()
+  const classes = useStyles()
 
 const handleClick = (id) => {
     props.clicked(id)
@@ -53,13 +67,21 @@ const handleClick = (id) => {
       data={employees}
       actions={[
         {
-          icon: 'save',
-          tooltip: 'Save User',
+          icon: 'view/manage',
+          tooltip: 'View or manage profile',
           onClick: (event, rowData) => handleClick(rowData.ID)
+        },
+        {
+          icon: 'add',
+          tooltip: 'Add User',
+          isFreeAction: true,
+          onClick: (event) => alert("Feature coming soon")
         }
       ]}
       components={{
-        Action: props => (
+        Action: props => {
+          if(props.action.icon === 'view/manage') {
+            return (
           <Button
             onClick={(event) => props.action.onClick(event, props.data)}
             color="primary"
@@ -69,7 +91,20 @@ const handleClick = (id) => {
           >
             View/Manage Profile
           </Button>
-        ),
+          )
+        } else {
+          return (
+            <Button
+            onClick={(event) => props.action.onClick(event, props.data)}
+            variant="contained"
+            className={classes.btn}
+            size="small"
+          >
+            Add Employee
+          </Button>
+          )
+        }
+        }
       }}
       options={{
         actionsColumnIndex: -1

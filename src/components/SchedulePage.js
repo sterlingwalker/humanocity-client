@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import MaterialTable from 'material-table'
 import { 
   AddBox,
@@ -11,6 +11,12 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
+import { Button } from '@material-ui/core'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -27,6 +33,21 @@ const tableIcons = {
 };
 
 export default function SchedulePage() {
+  const [open, setOpen] = useState()
+
+// Server will handle this eventually
+const dateMaker = (date) => {
+  let curr = new Date()
+  curr.setDate(curr.getDate() + date)
+  let first = curr.getDate() - curr.getDay()
+  let last = first + 6
+  let firstday = new Date(curr.setDate(first))
+  let lastday = new Date(curr.setDate(last))
+  return firstday.toLocaleDateString() + ' to ' + lastday.toLocaleDateString()
+}
+const [dateString, setDateString] = useState(dateMaker(0))
+
+const futureWeeks = [7,14,21,28]
 
   let employeeSchedule = [ // TEMPORARY
       {
@@ -54,7 +75,7 @@ export default function SchedulePage() {
   return (
     <MaterialTable
       icons={tableIcons}
-      title="Employee Schedule"
+      title={'Employee Schedule for week of: ' + dateString}
       columns={[
         { title: 'Employee', field: 'Employee' },
         { title: 'Monday', field: 'Monday'},
@@ -66,6 +87,31 @@ export default function SchedulePage() {
         { title: 'Sunday', field: 'Sunday'}
       ]}
       data={employeeSchedule}
+      components={{
+        Header: props => (
+          <React.Fragment>
+          <Button
+            onClick={(event) => setOpen(true)}
+            color="primary"
+            variant="contained"
+            style={{textTransform: 'none', marginLeft: 15}}
+            size="small"
+          >
+            Change Week
+          </Button>
+          <Dialog onClose={() => setOpen(false)} open={open}>
+          <DialogTitle>Select Week to change</DialogTitle>
+          <List>
+            {futureWeeks.map((week) => (
+              <ListItem button onClick={() => {setDateString(dateMaker(week)); setOpen(false)}} key={week}> {/* Eventually will fetch new data from server */}
+                <ListItemText primary={dateMaker(week)} />
+              </ListItem>
+            ))}
+          </List>
+          </Dialog>
+          </React.Fragment>
+        )
+      }}
     />
   );
 }

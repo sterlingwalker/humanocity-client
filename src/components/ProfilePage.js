@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -8,6 +8,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 import { employees } from '../demo';
 import { useHistory } from 'react-router';
 
@@ -34,13 +40,50 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     marginLeft: '1.5em',
     marginTop: '1em'
+  },
+  buttons: {
+    marginRight: 15
   }
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+})
+
+
 export default function ProfilePage(props) {
-  const classes = useStyles();
+  const classes = useStyles()
   let history = useHistory()
-  let currentEmployee = employees.find(employee => employee.ID === props.id);
+  const [open, setOpen] = useState(false)
+
+  const TerminateDialog = props => {
+    return (
+      <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => setOpen(false)}
+        >
+          <DialogTitle >{'Terminate Employee: ' + props.first + ' ' + props.last}</DialogTitle>
+          <DialogContent>
+            <DialogContentText >
+              Are you sure you would like to delete this employee? All of their data will 
+              be erased from the database PERMANENTLY!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={() => alert('Employee has been terminated')} color="secondary">
+              TERMINATE
+            </Button>
+          </DialogActions>
+        </Dialog>
+    )
+  }
+
+  let currentEmployee = employees.find(employee => employee.ID === props.id)
 
   if(currentEmployee !== undefined) {
     return (
@@ -83,9 +126,13 @@ export default function ProfilePage(props) {
               <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={"TODO"} />
               <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={"TODO"} />
             </div>
-            <Button variant="contained" color="primary" onClick={()=> alert("TODO!")}>
+            <Button variant="contained" color="primary" className={classes.buttons} onClick={()=> alert("TODO!")}>
                 Save
             </Button>
+            <Button variant="contained" color="secondary" className={classes.buttons} onClick={()=> setOpen(true)}>
+                Terminate
+            </Button>
+            <TerminateDialog first={currentEmployee.firstName} last={currentEmployee.lastName} />
           </form>
         </div>
       </div>
