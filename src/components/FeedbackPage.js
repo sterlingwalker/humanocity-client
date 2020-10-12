@@ -24,9 +24,14 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: '25ch',
+      width: '30ch',
+      marginLeft: 20
     },
   },
+    input: {
+    display: 'flex',
+    flexDirection: 'row'
+  }
 }));
 
 export default function FeedbackPage() {
