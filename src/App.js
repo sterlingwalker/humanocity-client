@@ -5,6 +5,7 @@ import ProfilePage from './components/ProfilePage'
 import NavigationBar from './components/NavigationBar'
 import HomePage from './components/HomePage'
 import SchedulePage from './components/SchedulePage'
+import FeedbackPage from './components/FeedbackPage'
 import { Route } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/employee' exact render={(props) => <ProfilePage {...props} id={selectedEmployee} />}  />
         <Route path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route path='/schedule' component={SchedulePage} />
+        <Route path='/feedback' component={FeedbackPage} />
       </React.Fragment>
     </div>
   );
