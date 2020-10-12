@@ -60,7 +60,7 @@ export default function FeedbackPage() {
           ))}
         </TextField>
         <form className={classes.root} noValidate autoComplete="off">
-          <div>        
+          <div className={classes.input} >        
             <TextField
               id="outlined-textarea"
               placeholder="Enter text here"
