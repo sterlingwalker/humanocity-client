@@ -79,9 +79,18 @@ export default function ProfilePage(props) {
               <TextField id="todo?" label="City" variant="outlined" defaultValue={currentEmployee.Address.City} required/>
               <TextField id="todo?" label="State" variant="outlined" defaultValue={currentEmployee.Address.State} required />
               <TextField id="todo?" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.Address.Zipcode} required />
-              <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={"TODO"} required />
-              <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={"TODO"} />
-              <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={"TODO"} />
+              <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={currentEmployee.phoneNumber} required />
+              <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={currentEmployee.emergencyName} required />
+              <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={currentEmployee.emergencyNumber} required />
+
+              <TextField id="todo?" label="ID" variant="outlined" defaultValue={currentEmployee.ID} required />
+              <TextField id="todo?" label="First Name" variant="outlined" defaultValue={currentEmployee.firstName} required />
+              <TextField id="todo?" label="Last Name" variant="outlined" defaultValue={currentEmployee.lastName} required />
+              <TextField id="todo?" label="Email" variant="outlined" defaultValue={currentEmployee.Email} required />
+              <TextField id="todo?" label="Salary" variant="outlined" defaultValue={currentEmployee.Salary} required />
+              <TextField id="todo?" label="Position" variant="outlined" defaultValue={currentEmployee.Position} required />
+              <TextField id="todo?" label="ManagerID" variant="outlined" defaultValue={currentEmployee.managerID} required />
+              <TextField id="todo?" label="Department" variant="outlined" defaultValue={currentEmployee.dept} required />
             </div>
             <Button variant="contained" color="primary" onClick={()=> alert("TODO!")}>
                 Save

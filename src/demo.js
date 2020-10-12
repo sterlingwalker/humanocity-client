@@ -5,6 +5,7 @@ export const employees = [
         "firstName": "John",
         "lastName": "Baran",
         "Email": "john@yahoo.com",
+        "phoneNumber": "(263)-555-8838",
         "Salary": "$75,000",
         "Position": "Engineer",
         "Address": {
@@ -15,12 +16,15 @@ export const employees = [
         },
         "managerID": "1739310389",
         "dept": "Engineering",
+        "emergencyName": "Kevin Smith",
+        "emergencyNumber": "(263)-555-8675",
     },
     {
         "ID": "8393810009",
         "firstName": "Zara",
         "lastName": "Pennington",
         "Email": "zara@gmail.com",
+        "phoneNumber": "(810)-555-6631",
         "Salary": "$115,000",
         "Position": "Chief Financial Officer",
         "Address": {
@@ -31,12 +35,15 @@ export const employees = [
         },
         "managerID": "",
         "dept": "Finance",
+        "emergencyName": "Daniel Pennington",
+        "emergencyNumber": "(810)-555-8767",
     },
     {
         "ID": "7370821829",
         "firstName": "Eric",
         "lastName": "Owens",
         "Email": "eric@gmail.com",
+        "phoneNumber": "(246)-555-3827",
         "Salary": "$52,000",
         "Position": "Accountant",
         "Address": {
@@ -47,12 +54,15 @@ export const employees = [
         },
         "managerID": "8393810009",
         "dept": "Finance",
+        "emergencyName": "Marie Owens",
+        "emergencyNumber": "(246)-555-9856",
     },
     {
         "ID": "1739310389",
         "firstName": "Ashley",
         "lastName": "Opec",
         "Email": "ashley@gmail.com",
+        "phoneNumber": "(966)-555-4726",
         "Salary": "$105,000",
         "Position": "Chief Engineer",
         "Address": {
@@ -63,12 +73,15 @@ export const employees = [
         },
         "managerID": "",
         "dept": "Engineering",
+        "emergencyName": "Gabriel Opec",
+        "emergencyNumber": "(966)555-8480",
     },
     {
         "ID": "8826619309",
         "firstName": "Kyle",
         "lastName": "Richmond",
         "Email": "kyle@yahoo.com",
+        "phoneNumber": "(248)-555-3627",
         "Salary": "$103,000",
         "Position": "Legal Counsel",
         "Address": {
@@ -79,5 +92,7 @@ export const employees = [
         },
         "managerID": "9008332356",
         "dept": "Legal",
+        "emergencyName": "Danielle Stevens",
+        "emergencyNumber": "(248)-555-3098",
     }
 ]
