@@ -8,6 +8,7 @@ import SchedulePage from './components/SchedulePage'
 import FeedbackPage from './components/FeedbackPage'
 import { Route } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
+import TimeOff from './components/TimeOff'
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -27,6 +28,7 @@ function App() {
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <React.Fragment>
         <Route path='/' exact component={HomePage} />
+        <Route path='/timeoff' render={(props) => <TimeOff {...props} clicked={setSelectedEmployee} />} />
         <Route path='/employee' exact render={(props) => <ProfilePage {...props} id={selectedEmployee} />}  />
         <Route path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route path='/schedule' component={SchedulePage} />

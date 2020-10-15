@@ -9,16 +9,17 @@ import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
     textAlign: 'center',
-    boxShadow: '0 3px 5px 4px #DDD'
+    boxShadow: '0 3px 5px 4px #DDD',
   },
+
   media: {
-    height: 140,
-    width: 140,
+    height: 120,
+    width: 120,
     marginLeft: 'auto',
-    marginRight: 'auto'
-  },
+    marginRight: 'auto',
+    marginTop: '2rem'
+  }
 });
 
 export default function HomeCard(props) {

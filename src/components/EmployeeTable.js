@@ -84,7 +84,7 @@ const handleClick = (id) => {
             return (
           <Button
             onClick={(event) => props.action.onClick(event, props.data)}
-            color="primary"
+            color= "primary"
             variant="contained"
             style={{textTransform: 'none'}}
             size="small"
@@ -109,6 +109,7 @@ const handleClick = (id) => {
       options={{
         actionsColumnIndex: -1
       }}
+      
     />
   )
 }
