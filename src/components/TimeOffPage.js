@@ -12,8 +12,8 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-  import { timeoff } from '../off'
-  import { useHistory } from 'react-router-dom'
+import { timeoff } from '../off'
+import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -29,7 +29,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
-const TimeOff = (props) => {
+const TimeOffPage = (props) => {
   let history = useHistory()
 
   const handleClick = (id) => {
@@ -113,4 +113,4 @@ const TimeOff = (props) => {
   )
 }
 
-export default TimeOff
+export default TimeOffPage
