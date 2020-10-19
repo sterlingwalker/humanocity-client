@@ -44,7 +44,7 @@ const handleClick = (id) => {
       icons={tableIcons}
       localization={{
         header: {
-          actions: 'Actionsd', 
+          actions: 'Actions', 
 
         },
        
@@ -107,8 +107,11 @@ const handleClick = (id) => {
         }
       ]}
       options={{
-        actionsColumnIndex: -1
-      }}
+        actionsColumnIndex: -1,
+        headerStyle: {
+          backgroundColor: '#6C6FA5',
+          color: '#ffffff'
+      }}}
       
     />
   )
