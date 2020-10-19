@@ -1,8 +1,6 @@
 import React, { forwardRef } from 'react'
 import MaterialTable from 'material-table'
 import { Button } from '@material-ui/core'
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles'
-import { red, green } from '@material-ui/core/colors'
 import { 
   AddBox,
   Clear,
@@ -38,11 +36,7 @@ const handleClick = (id) => {
     props.clicked(id)
     history.push('/timeoff')
 }
-const Theme = createMuiTheme({ palette: { 
-  primary: red,
-  secondary: green
-  } 
-})
+
 
 
   return (
@@ -84,33 +78,30 @@ const Theme = createMuiTheme({ palette: {
         {
           
           icon: props => (
-            <ThemeProvider theme={Theme}>
+
             <Button
               onClick={(event) => props.action.onClick(event, props.data)}
               color= "primary"
               variant="contained"
-              style={{textTransform: 'none'}} //Can add button styling here
+              style={{backgroundColor: 'red'}} //Can add button styling here
               size="small"
             >
               Deny
-            </Button>
-            </ThemeProvider>),
+            </Button>),
           tooltip: 'Deny Request',
           onClick: (event, rowData) => handleClick(rowData.ID)
         },
         {
           icon: props => (
-            <ThemeProvider theme={Theme}>
             <Button
               onClick={(event) => props.action.onClick(event, props.data)}
               color="secondary"
               variant="contained"
-              style={{textTransform: 'none'}} //Can add button styling here
+              style={{backgroundColor: 'green'}} //Can add button styling here
               size="small"
             >
               Approve
-            </Button>
-            </ThemeProvider>),
+              </Button>),
           tooltip: 'Approve Request',
           onClick: (event, rowData) => handleClick(rowData.ID)
         }
