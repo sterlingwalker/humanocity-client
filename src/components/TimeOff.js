@@ -32,53 +32,50 @@ const tableIcons = {
 const TimeOff = (props) => {
   let history = useHistory()
 
-const handleClick = (id) => {
-    props.clicked(id)
-    history.push('/timeoff')
-}
-
-
+  const handleClick = (id) => {
+      props.clicked(id)
+      history.push('/timeoff')
+  }
 
   return (
     <MaterialTable
       icons={tableIcons}
       localization={{
         header: {
-          actions: 'Actions', 
-
+          actions: 'Actions'
         },
-       
-       }}
+      }}
       title="All Employees"
       columns={[
-        { title: 'Requestor', field: 'Name',
-        headerStyle: {
-          backgroundColor: '#6C6FA5',
-          color: '#ffffff'
-        }
+        {
+          title: 'Requestor',
+          field: 'Name',
+          headerStyle: {
+            backgroundColor: '#6C6FA5',
+            color: '#ffffff'
+          }
         },
-        { title: 'Time Off Dates', field: 'dateoff' ,
-        headerStyle: {
-          backgroundColor: '#6C6FA5',
-          color: '#ffffff'
-        }
-      },
-        { title: 'Vacation Time Remaining', field: 'hoursleft',
-        headerStyle: {
-          backgroundColor: '#6C6FA5',
-          color: '#ffffff'
-        }
-      },
-      
-      
+        {
+          title: 'Time Off Dates',
+          field: 'dateoff',
+          headerStyle: {
+            backgroundColor: '#6C6FA5',
+            color: '#ffffff'
+          }
+        },
+        {
+          title: 'Vacation Time Remaining',
+          field: 'hoursleft',
+          headerStyle: {
+            backgroundColor: '#6C6FA5',
+            color: '#ffffff'
+          }
+        },
       ]}
       data={timeoff}
       actions={[
-        
         {
-          
           icon: props => (
-
             <Button
               onClick={(event) => props.action.onClick(event, props.data)}
               color= "primary"
@@ -112,16 +109,8 @@ const handleClick = (id) => {
           backgroundColor: '#6C6FA5',
           color: '#ffffff'
       }}}
-      
     />
   )
 }
-
-
-
-
-  
-
-
 
 export default TimeOff

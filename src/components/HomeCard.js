@@ -12,7 +12,6 @@ const useStyles = makeStyles({
     textAlign: 'center',
     boxShadow: '0 3px 5px 4px #DDD',
   },
-
   media: {
     height: 120,
     width: 120,
