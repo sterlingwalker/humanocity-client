@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import EmployeeTable from './components/EmployeeTable'
 import ProfilePage from './components/ProfilePage'
 import NavigationBar from './components/NavigationBar'
@@ -28,7 +27,7 @@ function App() {
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <React.Fragment>
         <Route path='/' exact component={HomePage} />
-        <Route path='/timeoff' render={(props) => <TimeOffPage {...props} clicked={setSelectedEmployee} />} />
+        <Route path='/timeoff' component={TimeOffPage} />
         <Route path='/employee' exact render={(props) => <ProfilePage {...props} id={selectedEmployee} />}  />
         <Route path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route path='/schedule' component={SchedulePage} />

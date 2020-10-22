@@ -13,7 +13,6 @@ import {
   Remove,
   ViewColumn} from '@material-ui/icons'
 import { timeoff } from '../off'
-import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -30,12 +29,8 @@ const tableIcons = {
   };
 
 const TimeOffPage = (props) => {
-  let history = useHistory()
 
-  const handleClick = (id) => {
-      props.clicked(id)
-      history.push('/timeoff')
-  }
+  const handleClick = (id) => {}
 
   return (
     <MaterialTable
@@ -77,10 +72,9 @@ const TimeOffPage = (props) => {
         {
           icon: props => (
             <Button
-              onClick={(event) => props.action.onClick(event, props.data)}
               color= "primary"
               variant="contained"
-              style={{backgroundColor: 'red'}} //Can add button styling here
+              style={{backgroundColor: 'red'}}
               size="small"
             >
               Deny
@@ -91,10 +85,9 @@ const TimeOffPage = (props) => {
         {
           icon: props => (
             <Button
-              onClick={(event) => props.action.onClick(event, props.data)}
               color="secondary"
               variant="contained"
-              style={{backgroundColor: 'green'}} //Can add button styling here
+              style={{backgroundColor: 'green'}}
               size="small"
             >
               Approve
