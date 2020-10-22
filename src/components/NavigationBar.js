@@ -36,7 +36,7 @@ const NavigationBar = (props) => {
         onChange={handleChange}
     >
         <Tab className={classes.tab} icon={<HomeIcon />} value='/' tabIndex={0} />
-        <Tab className={classes.tab} icon={<AlarmIcon />} value='' tabIndex={1}/>
+        <Tab className={classes.tab} icon={<AlarmIcon />} value='/timeoff' tabIndex={1}/>
         <Tab className={classes.tab} icon={<GroupIcon />} value='/employees' tabIndex={2}/>
         <Tab className={classes.tab} icon={<EventNote />} value='/schedule' tabIndex={3}/>
         <Tab className={classes.tab} icon={<CommentIcon />} value='/feedback' tabIndex={4}/>
