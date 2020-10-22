@@ -97,29 +97,31 @@ export const employees = [
     }
 ];
 
-
+// Week starts on Monday (index 0)
 export const employeeTimeOffs = [
     {
         "employeeId": "2748272849",
         "totalHours": 160,
         "hoursRemaining": 80,
-        "availability": {
-            "Monday": "9am-5pm",
-            "Tuesday": "9am-5pm",
-            "Wednesday": "9am-5pm",
-            "Thursday": "9am-5pm",
-            "Friday": "9am-3pm",
-            "Saturday": "",
-            "Sunday": ""
-        },
+        "availability": [
+            "9am-5pm",
+            "9am-5pm",
+            "9am-5pm",
+            "9am-5pm",
+            "9am-3pm",
+            "",
+            ""
+        ],
         "timeOffs": [
             {
-                "data": "2020-10-20",
-                "time": "9am-5pm"
+                "start": "2020-11-02 09:00",
+                "end": "2020-11-02 17:00",
+                "approved": "true"
             },
             {
-                "data": "2020-11-02",
-                "time": "9am-5pm"
+                "start": "2020-11-20 09:00",
+                "end": "2020-11-20 17:00",
+                "approved": "false"
             }
         ]
     },
@@ -127,23 +129,25 @@ export const employeeTimeOffs = [
         "employeeId": "8393810009",
         "totalHours": 100,
         "hoursRemaining": 16,
-        "availability": {
-            "Monday": "9am-5pm",
-            "Tuesday": "",
-            "Wednesday": "9am-5pm",
-            "Thursday": "",
-            "Friday": "9am-3pm",
-            "Saturday": "",
-            "Sunday": ""
-        },
+        "availability": [
+            "9am-5pm",
+            "",
+            "9am-5pm",
+            "",
+            "9am-3pm",
+            "",
+            ""
+        ],
         "timeOffs": [
             {
-                "data": "2020-10-21",
-                "time": "9am-5pm"
+                "start": "2020-11-02 00:00",
+                "end": "2020-11-20 23:59",
+                "approved": "true"
             },
             {
-                "data": "2020-11-04",
-                "time": "9am-12pm"
+                "start": "2020-12-18 09:00",
+                "end": "2020-12-18 14:00",
+                "approved": "false"
             }
         ]
     },
@@ -151,19 +155,25 @@ export const employeeTimeOffs = [
         "employeeId": "7370821829",
         "totalHours": 160,
         "hoursRemaining": 150,
-        "availability": {
-            "Monday": "9am-5pm",
-            "Tuesday": "9am-5pm",
-            "Wednesday": "9am-5pm",
-            "Thursday": "",
-            "Friday": "9am-3pm",
-            "Saturday": "9am-5pm",
-            "Sunday": ""
-        },
+        "availability": [
+            "9am-5pm",
+            "9am-5pm",
+            "",
+            "9am-5pm",
+            "9am-3pm",
+            "9am-5pm",
+            ""
+        ],
         "timeOffs": [
             {
-                "data": "2020-11-28",
-                "time": "9am-5pm"
+                "start": "2020-12-01 14:00",
+                "end": "2020-12-01 17:00",
+                "approved": "false"
+            },
+            {
+                "start": "2020-12-23 00:00",
+                "end": "2021-01-02 23:59",
+                "approved": "true"
             }
         ]
     },
@@ -171,42 +181,40 @@ export const employeeTimeOffs = [
         "employeeId": "1739310389",
         "totalHours": 50,
         "hoursRemaining": 0,
-        "availability": {
-            "Monday": "",
-            "Tuesday": "9am-5pm",
-            "Wednesday": "",
-            "Thursday": "9am-5pm",
-            "Friday": "",
-            "Saturday": "",
-            "Sunday": ""
-        },
+        "availability": [
+            "",
+            "9am-5pm",
+            "",
+            "9am-5pm",
+            "",
+            "",
+            ""
+        ],
         "timeOffs": []
     },
     {
         "employeeId": "8826619309",
         "totalHours": 150,
         "hoursRemaining": 16,
-        "availability": {
-            "Monday": "9am-5pm",
-            "Tuesday": "",
-            "Wednesday": "9am-5pm",
-            "Thursday": "",
-            "Friday": "9am-3pm",
-            "Saturday": "",
-            "Sunday": ""
-        },
+        "availability": [
+            "9am-5pm",
+            "",
+            "9am-5pm",
+            "",
+            "9am-3pm",
+            "",
+            ""
+        ],
         "timeOffs": [
             {
-                "data": "2020-11-09",
-                "time": "9am-5pm"
+                "start": "2020-12-01 00:00",
+                "end": "2020-12-01 23:59",
+                "approved": "true"
             },
             {
-                "data": "2020-11-11",
-                "time": "9am-5pm"
-            },
-            {
-                "data": "2020-11-13",
-                "time": "9am-5pm"
+                "start": "2020-12-10 00:00",
+                "end": "2020-12-14 23:59",
+                "approved": "false"
             }
         ]
     },
