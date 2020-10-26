@@ -75,7 +75,7 @@ const handleClick = (id) => {
           icon: 'add',
           tooltip: 'Add User',
           isFreeAction: true,
-          onClick: (event) => alert("Feature coming soon")
+          onClick: (event) => history.push('/newHire')
         }
       ]}
       components={{

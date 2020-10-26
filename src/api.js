@@ -14,17 +14,20 @@ export const getAllEmployees = async () => {
     }
 }
 
-export const postAllEmployees = async (employees) => {
+export const postNewEmployee = async (employee) => {
     try {
-        const response = await fetch(apiPath + 'employees', {
+        const response = await fetch(apiPath + 'new/employee', {
             method: 'POST',
             headers: {
                 Accept: 'application/json', 
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(employees)
+            body: JSON.stringify(employee)
         })
-        return await response.json();
+        if (response.status === 201){
+            return 'Employee Added Successfully'
+        }
+        return 'Error trying to add new employee'
     } catch (err) {
         return err;
     }
@@ -52,7 +55,7 @@ export const postEmployeeSchedule = async () => {
                 Accept: 'application/json', 
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(employees)
+            body: JSON.stringify()
         })
         return await response.json();
     } catch (err) {
@@ -82,7 +85,7 @@ export const postEmployeeTimeOffs = async () => {
                 Accept: 'application/json', 
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(employees)
+            body: JSON.stringify()
         })
         return await response.json();
     } catch (err) {

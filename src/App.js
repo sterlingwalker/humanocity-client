@@ -8,6 +8,7 @@ import FeedbackPage from './components/FeedbackPage'
 import TimeOffPage from './components/TimeOffPage'
 import { Route } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
+import NewEmployeePage from './components/NewEmployeePage';
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -16,7 +17,8 @@ function App() {
 
   useEffect(() =>
   {
-    if(history.location.pathname !== '/employee'){  //To keep the same tab when the profile is clicked
+    if(history.location.pathname !== '/employee'&&
+        history.location.pathname !== '/newHire'){  //To keep the same tab when the profile/add employee is clicked
       setTab(history.location.pathname)
     }
   },[history.location])
@@ -32,6 +34,7 @@ function App() {
         <Route path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route path='/schedule' component={SchedulePage} />
         <Route path='/feedback' component={FeedbackPage} />
+        <Route path='/newHire' component={NewEmployeePage} />
       </React.Fragment>
     </div>
   );
