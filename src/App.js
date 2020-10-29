@@ -30,7 +30,7 @@ function App() {
       <React.Fragment>
         <Route path='/' exact component={HomePage} />
         <Route path='/timeoff' component={TimeOffPage} />
-        <Route path='/employee' exact render={(props) => <ProfilePage {...props} id={selectedEmployee} />}  />
+        <Route path='/employee' exact render={(props) => <ProfilePage {...props} currentEmployee={selectedEmployee} />}  />
         <Route path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route path='/schedule' component={SchedulePage} />
         <Route path='/feedback' component={FeedbackPage} />
