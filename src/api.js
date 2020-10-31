@@ -1,7 +1,7 @@
-import { employees } from './demo'
+import { employees } from './demo';
 const apiPath = '/hr-server/api/v1/';
 
-const isDemo = false //Change to true for demo data
+const isDemo = false; //Change to true for demo data
 
 export const getAllEmployees = async () => {
     if(isDemo) {
@@ -19,6 +19,7 @@ export const getAllEmployees = async () => {
         return err;
     }
 }
+
 export const getSingleEmployee = async (id) => {
     if(isDemo) {
         return employees.find(employee => employee.id === id)
@@ -35,6 +36,7 @@ export const getSingleEmployee = async (id) => {
         return err;
     }
 }
+
 export const postNewEmployee = async (employee) => {
     try {
         const response = await fetch(apiPath + 'new/employee', {
