@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
 import { Button } from '@material-ui/core'
 import { 
@@ -12,7 +12,7 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-  import { employees } from '../demo'
+  import { getAllEmployees, getSingleEmployee } from '../api'
   import { useHistory } from 'react-router-dom'
   import { makeStyles } from '@material-ui/core/styles'
 
@@ -45,10 +45,17 @@ const useStyles = makeStyles((theme) => ({
 const EmployeeTable = (props) => {
   let history = useHistory()
   const classes = useStyles()
+  const[employees, setEmployees] = useState([])
+  useEffect(() => {
+    getAllEmployees()
+    .then(response => setEmployees(response))
+  }, [])
 
 const handleClick = (id) => {
-    props.clicked(id)
-    history.push('/employee')
+    getSingleEmployee(id).then(response => {
+      props.clicked(response)
+      history.push('/employee')
+    })
 }
 
   return (
@@ -58,7 +65,7 @@ const handleClick = (id) => {
       columns={[
         { title: 'First Name', field: 'firstName' },
         { title: 'Last Name', field: 'lastName' },
-        { title: 'Employee ID', field: 'ID'},
+        { title: 'Employee ID', field: 'id'},
         {
           title: 'Department',
           field: 'dept',
@@ -69,7 +76,7 @@ const handleClick = (id) => {
         {
           icon: 'view/manage',
           tooltip: 'View or manage profile',
-          onClick: (event, rowData) => handleClick(rowData.ID)
+          onClick: (event, rowData) => handleClick(rowData.id)
         },
         {
           icon: 'add',

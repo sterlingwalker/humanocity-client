@@ -14,8 +14,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { employees } from '../demo';
 import { useHistory } from 'react-router';
+import { patchSingleEmployee } from '../api';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+
 
 const cardWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -51,10 +54,51 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 
-export default function ProfilePage(props) {
+export default function ProfilePage({currentEmployee}) {
   const classes = useStyles()
   let history = useHistory()
   const [open, setOpen] = useState(false)
+  const [updatePrompt, setUpdatePrompt] = useState({open: false, severity: 'error', message: ''})
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setUpdatePrompt({...updatePrompt, open: false});
+  }
+
+  const updateEmployee = event => {
+    let data = {
+      id: document.getElementById('id').value,
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      position: document.getElementById('position').value,
+      salary: document.getElementById('salary').value.replace(',','').replace('$','').replace('.00',''),
+      dept: document.getElementById('dept').value,
+      email: document.getElementById('email').value,
+      managerID: document.getElementById('managerId').value,
+      address: {
+          street: document.getElementById('street').value + 
+          document.getElementById('street2').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          zipcode: document.getElementById('zipcode').value
+      }
+    }
+    patchSingleEmployee(data).then(response => {
+      if(response.includes('Error')){
+        setUpdatePrompt({open: true, severity: 'error', message: response })
+      } else {
+        setUpdatePrompt({open: true, severity: 'success', message: response})
+      }
+    })
+  }
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
 
   const TerminateDialog = props => {
     return (
@@ -83,9 +127,8 @@ export default function ProfilePage(props) {
     )
   }
 
-  let currentEmployee = employees.find(employee => employee.ID === props.id)
 
-  if(currentEmployee !== undefined) {
+  if(currentEmployee !== null) {
     return (
       <div className={classes.container}>
         <div>
@@ -97,18 +140,18 @@ export default function ProfilePage(props) {
                   {currentEmployee.firstName + " " + currentEmployee.lastName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {currentEmployee.Position}
+                  {currentEmployee.position}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {currentEmployee.Email}
+                  {currentEmployee.email}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" onClick={()=> window.open("mailto:" + currentEmployee.Email, "_blank")}>
+              <Button size="small" color="primary" onClick={()=> window.open("mailto:" + currentEmployee.email, "_blank")}>
                 Send Email
               </Button>
-              <Button size="small" color="primary" onClick={()=> navigator.clipboard.writeText(currentEmployee.Email) /* TODO: Show toast or s/t... */}> 
+              <Button size="small" color="primary" onClick={()=> navigator.clipboard.writeText(currentEmployee.email) /* TODO: Show toast or s/t... */}> 
                 Copy Email Address
               </Button>
             </CardActions>
@@ -117,25 +160,25 @@ export default function ProfilePage(props) {
           <div className={classes.formGroup}>
           <form className={classes.form} noValidate autoComplete="off">
             <div>
-              <TextField id="todo?" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.Address.Street} required/>
-              <TextField id="todo?" label="Street Address 2" variant="outlined" defaultValue={"TODO"} />
-              <TextField id="todo?" label="City" variant="outlined" defaultValue={currentEmployee.Address.City} required/>
-              <TextField id="todo?" label="State" variant="outlined" defaultValue={currentEmployee.Address.State} required />
-              <TextField id="todo?" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.Address.Zipcode} required />
+              <TextField id="street" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.address.street} required/>
+              <TextField id="street2" label="Street Address 2" variant="outlined" defaultValue={"TODO"} />
+              <TextField id="city" label="City" variant="outlined" defaultValue={currentEmployee.address.city} required/>
+              <TextField id="state" label="State" variant="outlined" defaultValue={currentEmployee.address.state} required />
+              <TextField id="zipcode" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.address.zipcode} required />
               <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={currentEmployee.phoneNumber} required />
               <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={currentEmployee.emergencyName} required />
               <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={currentEmployee.emergencyNumber} required />
 
-              <TextField id="todo?" label="ID" variant="outlined" defaultValue={currentEmployee.ID} required />
-              <TextField id="todo?" label="First Name" variant="outlined" defaultValue={currentEmployee.firstName} required />
-              <TextField id="todo?" label="Last Name" variant="outlined" defaultValue={currentEmployee.lastName} required />
-              <TextField id="todo?" label="Email" variant="outlined" defaultValue={currentEmployee.Email} required />
-              <TextField id="todo?" label="Salary" variant="outlined" defaultValue={currentEmployee.Salary} required />
-              <TextField id="todo?" label="Position" variant="outlined" defaultValue={currentEmployee.Position} required />
-              <TextField id="todo?" label="ManagerID" variant="outlined" defaultValue={currentEmployee.managerID} required />
-              <TextField id="todo?" label="Department" variant="outlined" defaultValue={currentEmployee.dept} required />
+              <TextField id="id" label="ID" variant="outlined" defaultValue={currentEmployee.id} required />
+              <TextField id="firstName" label="First Name" variant="outlined" defaultValue={currentEmployee.firstName} required />
+              <TextField id="lastName" label="Last Name" variant="outlined" defaultValue={currentEmployee.lastName} required />
+              <TextField id="email" label="Email" variant="outlined" defaultValue={currentEmployee.email} required />
+              <TextField id="salary" label="Salary" variant="outlined" defaultValue={formatter.format(currentEmployee.salary)} required />
+              <TextField id="position" label="Position" variant="outlined" defaultValue={currentEmployee.position} required />
+              <TextField id="managerId" label="ManagerID" variant="outlined" defaultValue={currentEmployee.managerID} required />
+              <TextField id="dept" label="Department" variant="outlined" defaultValue={currentEmployee.dept} required />
             </div>
-            <Button variant="contained" color="primary" className={classes.buttons} onClick={()=> alert("TODO!")}>
+            <Button variant="contained" color="primary" className={classes.buttons} onClick={updateEmployee}>
                 Save
             </Button>
             <Button variant="contained" color="secondary" className={classes.buttons} onClick={()=> setOpen(true)}>
@@ -144,6 +187,11 @@ export default function ProfilePage(props) {
             <TerminateDialog first={currentEmployee.firstName} last={currentEmployee.lastName} />
           </form>
         </div>
+        <Snackbar open={updatePrompt.open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={updatePrompt.severity}>
+            {updatePrompt.message}
+          </Alert>
+        </Snackbar>
       </div>
   ) } else {
     history.push('/employees')

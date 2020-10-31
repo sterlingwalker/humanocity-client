@@ -152,9 +152,6 @@ const NewEmployeePage = props => {
             message={message}
             action={
             <React.Fragment>
-                <Button color="primary" size="small" onClick={handleClose}>
-                UNDO
-                </Button>
                 <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                 <CloseIcon fontSize="small" />
                 </IconButton>
