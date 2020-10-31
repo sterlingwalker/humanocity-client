@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar'
 import HomePage from './components/HomePage'
 import SchedulePage from './components/SchedulePage'
 import FeedbackPage from './components/FeedbackPage'
+import FeedbackList from './components/FeedbackList'
 import TimeOffPage from './components/TimeOffPage'
 import { Route } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
@@ -35,6 +36,7 @@ function App() {
         <Route path='/schedule' component={SchedulePage} />
         <Route path='/feedback' component={FeedbackPage} />
         <Route path='/newHire' component={NewEmployeePage} />
+        <Route path='/feedbackList' component={FeedbackList} />
       </React.Fragment>
     </div>
   );
