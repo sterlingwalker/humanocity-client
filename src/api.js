@@ -11,6 +11,13 @@ export const getAllEmployees = async () => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -27,6 +34,13 @@ export const postAllEmployees = async (employees) => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -41,6 +55,13 @@ export const getEmployeeSchedule = async () => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -57,6 +78,13 @@ export const postEmployeeSchedule = async () => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -71,6 +99,13 @@ export const getEmployeeTimeOffs = async () => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -85,7 +120,14 @@ export const postEmployeeTimeOffs = async () => {
             body: JSON.stringify(employees)
         })
         return await response.json();
-    } catch (err) {
+    }  catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
