@@ -19,7 +19,7 @@ export default function HomePage() {
           <HomeCard icon={process.env.PUBLIC_URL + '/icons/schedule.svg'} title="Schedule" description="Weekly employee schedule"  url={'/schedule'}/>
         </Grid>
         <Grid item xs>
-          <HomeCard icon={process.env.PUBLIC_URL + '/icons/feedback.svg'} title="Feedback" description="Employee complaints and feedback" url={'/feedback'}/>
+          <HomeCard icon={process.env.PUBLIC_URL + '/icons/feedback.svg'} title="Feedback" description="Employee complaints and feedback" url={'/feedbackList'}/>
         </Grid>
       </Grid>
     </div>
