@@ -41,6 +41,13 @@ export const getSingleEmployee = async (id) => {
         return await response.json();
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
@@ -60,6 +67,13 @@ export const postNewEmployee = async (employee) => {
         return 'Error trying to add new employee'
     } catch (err) {
         return err;
+    } finally {fetch('/404page').then(function(response) {
+        if (response.status !== 200) {
+          return response.json()
+        }
+      }).then(function(object) {
+        console.log(object.type, object.message)
+      })
     }
 }
 
