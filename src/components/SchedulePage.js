@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
 import { 
   AddBox,
@@ -17,6 +17,8 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Dialog from '@material-ui/core/Dialog'
+import { getSchedule } from '../api'
+import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -33,44 +35,72 @@ const tableIcons = {
 };
 
 export default function SchedulePage() {
-  const [open, setOpen] = useState()
+  let history = useHistory();
+  const [open, setOpen] = useState();
+  const [employeeSchedule, setSchedule] = useState([]);
+  useEffect(() => {
+    getSchedule(scheduleMonday)
+    .then(response => {
+      console.log(response);
+      let table = [];
+      for (let index = 0; index < response.length; index++) {
+        const employeeSchedule = response[index];
+        console.log(employeeSchedule);
+        let row = {
+          Employee: employeeSchedule.firstName + " " + employeeSchedule.lastName,
+          Monday: availabilityToString(employeeSchedule.availability[0]),
+          Tuesday: availabilityToString(employeeSchedule.availability[1]),
+          Wednesday: availabilityToString(employeeSchedule.availability[2]),
+          Thursday: availabilityToString(employeeSchedule.availability[3]),
+          Friday: availabilityToString(employeeSchedule.availability[4]),
+          Saturday: availabilityToString(employeeSchedule.availability[5]),
+          Sunday: availabilityToString(employeeSchedule.availability[6]),
+        };
+        table.push(row);
+        console.log(row);
+      }
+      setSchedule(table);
+    })
+    .catch(() => history.push('/error'))
+  }, [history]);
 
-// Server will handle this eventually
-const dateMaker = (date) => {
-  let curr = new Date()
-  curr.setDate(curr.getDate() + date)
-  let first = curr.getDate() - curr.getDay()
-  let last = first + 6
-  let firstday = new Date(curr.setDate(first))
-  let lastday = new Date(curr.setDate(last))
-  return firstday.toLocaleDateString() + ' to ' + lastday.toLocaleDateString()
+  function availabilityToString(availability) {
+    if (availability.off) {
+      return "Off";
+    }
+    return hourToAmPmString(availability.start) + " - " + hourToAmPmString(availability.end);
+  }
+
+  function hourToAmPmString(hour) {
+    return (hour % 12) + (hour < 12 ? "A" : "P") + "M";
 }
-const [dateString, setDateString] = useState(dateMaker(0))
 
-const futureWeeks = [7,14,21,28]
+const dateMaker = (weeksOffset) => {
+  let monday = getMonday(new Date());
+  let offsetMonday = addDays(monday, weeksOffset * 7);
+  let offsetSunday = addDays(offsetMonday, 6);
+  return offsetMonday.toLocaleDateString() + ' to ' + offsetSunday.toLocaleDateString(); // Weeks are Monday to Sunday
+}
 
-  let employeeSchedule = [ // TEMPORARY
-      {
-        Employee: "First Last",
-        Monday: "9 AM - 5 PM",
-        Tuesday: "OFF",
-        Wednesday: "9 AM - 5 PM",
-        Thursday: "OFF",
-        Friday: "9 AM - 5 PM",
-        Saturday: "OFF",
-        Sunday: "OFF",
-      },
-      {
-        Employee: "First2 Last2",
-        Monday: "OFF",
-        Tuesday: "9 AM - 5 PM",
-        Wednesday: "OFF",
-        Thursday: "9 AM - 5 PM",
-        Friday: "OFF",
-        Saturday: "OFF",
-        Sunday: "OFF",
-      },
-    ];
+const mondayMaker = (weeksOffset) => {
+  return addDays(getMonday(new Date()), weeksOffset * 7);
+} 
+
+function getMonday(date) {
+  date = new Date(date);
+  let day = date.getDay();
+  let diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+  return new Date(date.setDate(diff));
+}
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+const [dateString, setDateString] = useState(dateMaker(0));
+const [scheduleMonday, setMonday] = useState(mondayMaker(0));
 
   return (
     <MaterialTable
@@ -102,9 +132,9 @@ const futureWeeks = [7,14,21,28]
           <Dialog onClose={() => setOpen(false)} open={open}>
           <DialogTitle>Select Week to change</DialogTitle>
           <List>
-            {futureWeeks.map((week) => (
-              <ListItem button onClick={() => {setDateString(dateMaker(week)); setOpen(false)}} key={week}> {/* Eventually will fetch new data from server */}
-                <ListItemText primary={dateMaker(week)} />
+            {[0,1,2,3,4].map((weeksOffset) => (
+              <ListItem button onClick={() => {setDateString(dateMaker(weeksOffset)); setMonday(mondayMaker(weeksOffset)); setOpen(false)}} key={weeksOffset}>
+                <ListItemText primary={dateMaker(weeksOffset)} />
               </ListItem>
             ))}
           </List>
