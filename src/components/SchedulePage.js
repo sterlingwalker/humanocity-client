@@ -50,7 +50,6 @@ export default function SchedulePage() {
       let table = [];
       for (let index = 0; index < response.length; index++) {
         const employeeSchedule = response[index];
-        console.log(employeeSchedule);
         let row = {
           Employee: employeeSchedule.firstName + " " + employeeSchedule.lastName,
           Monday: availabilityToString(employeeSchedule.availability[0]),
@@ -62,7 +61,6 @@ export default function SchedulePage() {
           Sunday: availabilityToString(employeeSchedule.availability[6]),
         };
         table.push(row);
-        console.log(row);
       }
       setSchedule(table);
     })
