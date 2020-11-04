@@ -64,7 +64,6 @@ export const patchSingleEmployee = async (employee) => {
             },
             body: JSON.stringify(employee)
         })
-        console.log(response)
         if (response.status === 200){
             return 'Employee Updated Successfully'
         }
@@ -74,29 +73,27 @@ export const patchSingleEmployee = async (employee) => {
         return 'Error trying to update employee'
 }
 
-export const getEmployeeSchedule = async () => {
-  
-        const response = await fetch(apiPath + 'employeeSchedule', {
+function formatDate(date) { // Formats a date as yyyy-mm-dd
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+export const getSchedule = async (monday) => {
+    
+        const response = await fetch(apiPath + 'schedule?monday=' + formatDate(monday), {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
             }
-        })
-        if (response.status === 500) {
-          throw new Error('500')
-        }
-        return await response.json();
-}
-
-export const postEmployeeSchedule = async () => {
-
-        const response = await fetch(apiPath + 'employeeSchedule', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json', 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify()
         })
         if (response.status === 500) {
           throw new Error('500')
