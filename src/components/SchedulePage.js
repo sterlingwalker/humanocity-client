@@ -39,14 +39,13 @@ export default function SchedulePage() {
   const [open, setOpen] = useState();
   const [employeeSchedule, setSchedule] = useState([]);
   useEffect(() => {
-    refreshSchedule(mondayMaker(0))   // eslint-disable-next-line
+    refreshSchedule(mondayMaker(0));   // eslint-disable-next-line
   }, []);
 
   const refreshSchedule = (scheduleMonday) => {
-    setSchedule([])
+    setSchedule([]);
     getSchedule(scheduleMonday)
     .then(response => {
-      console.log(response);
       let table = [];
       for (let index = 0; index < response.length; index++) {
         const employeeSchedule = response[index];

@@ -64,7 +64,6 @@ export const patchSingleEmployee = async (employee) => {
             },
             body: JSON.stringify(employee)
         })
-        console.log(response)
         if (response.status === 200){
             return 'Employee Updated Successfully'
         }
