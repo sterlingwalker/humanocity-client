@@ -39,6 +39,11 @@ export default function SchedulePage() {
   const [open, setOpen] = useState();
   const [employeeSchedule, setSchedule] = useState([]);
   useEffect(() => {
+    refreshSchedule(mondayMaker(0))   // eslint-disable-next-line
+  }, []);
+
+  const refreshSchedule = (scheduleMonday) => {
+    setSchedule([])
     getSchedule(scheduleMonday)
     .then(response => {
       console.log(response);
@@ -62,7 +67,7 @@ export default function SchedulePage() {
       setSchedule(table);
     })
     .catch(() => history.push('/error'))
-  }, [history]);
+  }
 
   function availabilityToString(availability) {
     if (availability.off) {
@@ -100,7 +105,6 @@ function addDays(date, days) {
 }
 
 const [dateString, setDateString] = useState(dateMaker(0));
-const [scheduleMonday, setMonday] = useState(mondayMaker(0));
 
   return (
     <MaterialTable
@@ -117,14 +121,15 @@ const [scheduleMonday, setMonday] = useState(mondayMaker(0));
         { title: 'Sunday', field: 'Sunday'}
       ]}
       data={employeeSchedule}
+      isLoading={employeeSchedule.length === 0}
       components={{
-        Header: props => (
+        Actions: props => (
           <React.Fragment>
           <Button
             onClick={(event) => setOpen(true)}
             color="primary"
             variant="contained"
-            style={{textTransform: 'none', marginLeft: 15}}
+            style={{textTransform: 'none', marginRight: 15, marginLeft: 15}}
             size="small"
           >
             Change Week
@@ -133,7 +138,7 @@ const [scheduleMonday, setMonday] = useState(mondayMaker(0));
           <DialogTitle>Select Week to change</DialogTitle>
           <List>
             {[0,1,2,3,4].map((weeksOffset) => (
-              <ListItem button onClick={() => {setDateString(dateMaker(weeksOffset)); setMonday(mondayMaker(weeksOffset)); setOpen(false)}} key={weeksOffset}>
+              <ListItem button onClick={() => {setDateString(dateMaker(weeksOffset)); refreshSchedule(mondayMaker(weeksOffset)); setOpen(false)}} key={weeksOffset}>
                 <ListItemText primary={dateMaker(weeksOffset)} />
               </ListItem>
             ))}
