@@ -1,6 +1,5 @@
 import { employees } from './demo';
-const serverHostname = 'http://localhost:8095';
-const apiPath = serverHostname + '/hr-server/api/v1/';
+const apiPath = '/hr-server/api/v1/';
 
 const isDemo = false; //Change to true for demo data
 
