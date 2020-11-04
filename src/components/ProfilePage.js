@@ -92,7 +92,7 @@ export default function ProfilePage({currentEmployee}) {
       } else {
         setUpdatePrompt({open: true, severity: 'success', message: response})
       }
-    })
+    }).catch(() => history.push('/error'))
   }
 
   const formatter = new Intl.NumberFormat('en-US', {

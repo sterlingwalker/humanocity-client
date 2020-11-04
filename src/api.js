@@ -7,52 +7,36 @@ export const getAllEmployees = async () => {
     if(isDemo) {
         return employees
     }
-    try {
         const response = await fetch(apiPath + 'employees', {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
             }
         })
-        return await response.json();
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }
 
 export const getSingleEmployee = async (id) => {
     if(isDemo) {
         return employees.find(employee => employee.id === id)
     }
-    try {
         const response = await fetch(apiPath + 'employee/' + id, {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
             }
         })
-        return await response.json();
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }
 
 export const postNewEmployee = async (employee) => {
-    try {
+
         const response = await fetch(apiPath + 'new/employee', {
             method: 'POST',
             headers: {
@@ -64,21 +48,14 @@ export const postNewEmployee = async (employee) => {
         if (response.status === 201){
             return 'Employee Added Successfully'
         }
-        return 'Error trying to add new employee'
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return 'Error trying to add new employee'
 }
 
 export const patchSingleEmployee = async (employee) => {
-    try {
+
         const response = await fetch(apiPath + 'update/employee', {
             method: 'PATCH',
             headers: {
@@ -91,42 +68,28 @@ export const patchSingleEmployee = async (employee) => {
         if (response.status === 200){
             return 'Employee Updated Successfully'
         }
-        return 'Error trying to update employee'
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return 'Error trying to update employee'
 }
 
 export const getEmployeeSchedule = async () => {
-    try {
+  
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
             }
         })
-        return await response.json();
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }
 
 export const postEmployeeSchedule = async () => {
-    try {
+
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'POST',
             headers: {
@@ -135,42 +98,28 @@ export const postEmployeeSchedule = async () => {
             },
             body: JSON.stringify()
         })
-        return await response.json();
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }
 
 export const getEmployeeTimeOffs = async () => {
-    try {
+
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
             }
         })
-        return await response.json();
-    } catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }
 
 export const postEmployeeTimeOffs = async () => {
-    try {
+  
         const response = await fetch(apiPath + 'employeeSchedule', {
             method: 'POST',
             headers: {
@@ -179,15 +128,8 @@ export const postEmployeeTimeOffs = async () => {
             },
             body: JSON.stringify()
         })
-        return await response.json();
-    }  catch (err) {
-        return err;
-    } finally {fetch('/404page').then(function(response) {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 500) {
+          throw new Error('500')
         }
-      }).then(function(object) {
-        console.log(object.type, object.message)
-      })
-    }
+        return await response.json();
 }

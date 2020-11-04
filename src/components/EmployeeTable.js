@@ -49,13 +49,14 @@ const EmployeeTable = (props) => {
   useEffect(() => {
     getAllEmployees()
     .then(response => setEmployees(response))
-  }, [])
+    .catch(() => history.push('/error'))
+  }, [history])
 
 const handleClick = (id) => {
     getSingleEmployee(id).then(response => {
       props.clicked(response)
       history.push('/employee')
-    })
+    }).catch(() => history.push('/error'))
 }
 
   return (

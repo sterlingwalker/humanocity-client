@@ -7,10 +7,10 @@ import SchedulePage from './components/SchedulePage'
 import FeedbackPage from './components/FeedbackPage'
 import FeedbackList from './components/FeedbackList'
 import TimeOffPage from './components/TimeOffPage'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
 import NewEmployeePage from './components/NewEmployeePage';
-import NoMatch from './components/404page';
+import NoMatch, { ServerError } from './components/404page';
 import { Redirect } from 'react-router-dom'
 
 function App() {
@@ -31,16 +31,19 @@ function App() {
       <NavigationBar currentTab={tab} />
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <React.Fragment>
-        <Route exact path='/' exact component={HomePage} />
+        <Switch>
+        <Route exact path='/' component={HomePage} />
         <Route exact path='/timeoff' component={TimeOffPage} />
-        <Route exact path='/employee' exact render={(props) => <ProfilePage {...props} currentEmployee={selectedEmployee} />}  />
+        <Route exact path='/employee' render={(props) => <ProfilePage {...props} currentEmployee={selectedEmployee} />}  />
         <Route exact path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route exact path='/schedule' component={SchedulePage} />
         <Route exact path='/feedback' component={FeedbackPage} />
         <Route exact path='/newHire' component={NewEmployeePage} />
         <Route exact path='/feedbackList' component={FeedbackList} />
-        <Route path='/404page' component={NoMatch} />
+        <Route exact path='/404page' component={NoMatch} />
+        <Route exact path='/error' component={ServerError} />
         <Redirect to='/404page'/>
+        </Switch>
       </React.Fragment>
     </div>
   );

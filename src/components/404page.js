@@ -15,4 +15,17 @@ const NoMatch = ({ history }) => {
   );
 };
 
+export const ServerError = ({ history }) => {
+  return (
+    <div>
+      <Alert severity="error">
+        An error as occurred when trying to reach the server. Please return to the <span style={{ color: "blue" }} onClick={() => history.push("/")}>
+          {" "}
+          Home Page{" "}
+        </span>
+      </Alert>
+    </div>
+  );
+};
+
 export default NoMatch;

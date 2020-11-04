@@ -90,7 +90,7 @@ const NewEmployeePage = props => {
             if(response.includes('Added')){
                 setTimeout(() =>  history.push('/employees'), 6000)
             }
-        })
+        }).catch(() => history.push('/error'))
 
     }
 
