@@ -73,6 +73,24 @@ export const patchSingleEmployee = async (employee) => {
         return 'Error trying to update employee'
 }
 
+export const terminateEmployee = async (id) => {
+
+    const response = await fetch(apiPath + 'update/terminate/' + id, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+    if (response.status === 200){
+        return 'Employee Terminated Successfully'
+    }
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return 'Error trying to terminate employee'
+}
+
 function formatDate(date) { // Formats a date as yyyy-mm-dd
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),

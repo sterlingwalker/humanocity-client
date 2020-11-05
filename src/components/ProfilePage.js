@@ -15,7 +15,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { useHistory } from 'react-router';
-import { patchSingleEmployee } from '../api';
+import { patchSingleEmployee, terminateEmployee } from '../api';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
@@ -95,6 +95,20 @@ export default function ProfilePage({currentEmployee}) {
     }).catch(() => history.push('/error'))
   }
 
+  const removeEmployee = event => {
+    terminateEmployee(currentEmployee.id).then(response => {
+      if(response.includes('Error')){
+        setUpdatePrompt({open: true, severity: 'error', message: response })
+      } else {
+        setUpdatePrompt({open: true, severity: 'success', message: response})
+        setOpen(false)
+        if(response.includes('Success')){
+          setTimeout(() =>  history.push('/employees'), 2000)
+      }
+      }
+    }).catch(() => history.push('/error'))
+  }
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -119,7 +133,7 @@ export default function ProfilePage({currentEmployee}) {
             <Button onClick={() => setOpen(false)} color="primary">
               Cancel
             </Button>
-            <Button onClick={() => alert('Employee has been terminated')} color="secondary">
+            <Button onClick={removeEmployee} color="secondary">
               TERMINATE
             </Button>
           </DialogActions>
