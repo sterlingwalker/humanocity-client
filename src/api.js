@@ -1,7 +1,7 @@
 import { employees } from './demo';
 const apiPath = '/hr-server/api/v1/';
 
-const isDemo = true; //Change to true for demo data
+const isDemo = false; //Change to true for demo data
 
 export const getAllEmployees = async () => {
     if(isDemo) {
