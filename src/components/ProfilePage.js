@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -18,6 +18,9 @@ import { useHistory } from 'react-router';
 import { patchSingleEmployee, terminateEmployee } from '../api';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import { firebaseConfig } from '../config';
+import firebase from "firebase/app";
+import 'firebase/storage';
 
 
 const cardWidth = 300;
@@ -59,6 +62,13 @@ export default function ProfilePage({currentEmployee}) {
   let history = useHistory()
   const [open, setOpen] = useState(false)
   const [updatePrompt, setUpdatePrompt] = useState({open: false, severity: 'error', message: ''})
+  const [image, setImage] = useState(null)
+
+  useEffect(() => {
+    firebase.initializeApp(firebaseConfig);
+    firebase.storage().ref().child('/'+ currentEmployee.id+'.jpg')
+    .getDownloadURL().then(url => setImage(url));
+  }, [currentEmployee.id])
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -141,14 +151,12 @@ export default function ProfilePage({currentEmployee}) {
     )
   }
 
-
-  if(currentEmployee !== null) {
     return (
       <div className={classes.container}>
         <div>
           <Card className={classes.card}>
             <CardActionArea>
-              <CardMedia className={classes.media} image="https://via.placeholder.com/300" title={currentEmployee.firstName + "'s Picture"} />
+              <CardMedia className={classes.media} image={image} title={currentEmployee.firstName + "'s Picture"} />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {currentEmployee.firstName + " " + currentEmployee.lastName}
@@ -207,8 +215,5 @@ export default function ProfilePage({currentEmployee}) {
           </Alert>
         </Snackbar>
       </div>
-  ) } else {
-    history.push('/employees')
-    return null
-  }
+  ) 
 }

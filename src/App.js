@@ -34,7 +34,7 @@ function App() {
         <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/timeoff' component={TimeOffPage} />
-        <Route exact path='/employee' render={(props) => <ProfilePage {...props} currentEmployee={selectedEmployee} />}  />
+        <Route exact path='/employee' render={(props) => selectedEmployee !== null ? <ProfilePage {...props} currentEmployee={selectedEmployee} /> : <Redirect to='/employees'/>}  />
         <Route exact path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route exact path='/schedule' component={SchedulePage} />
         <Route exact path='/feedback' component={FeedbackPage} />
