@@ -11,13 +11,18 @@ import { Route, Switch } from 'react-router'
 import { withRouter, useHistory } from 'react-router-dom'
 import NewEmployeePage from './components/NewEmployeePage';
 import NoMatch, { ServerError } from './components/404page';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { firebaseConfig } from './config';
+import firebase from "firebase/app";
 
 function App() {
   const [tab, setTab] = useState('/')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   let history = useHistory()
 
+  useEffect(() => {
+    firebase.initializeApp(firebaseConfig);
+  }, [])
   useEffect(() =>
   {
     if(history.location.pathname !== '/employee'&&

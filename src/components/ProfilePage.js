@@ -18,7 +18,6 @@ import { useHistory } from 'react-router';
 import { patchSingleEmployee, terminateEmployee } from '../api';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import { firebaseConfig } from '../config';
 import firebase from "firebase/app";
 import 'firebase/storage';
 
@@ -65,7 +64,6 @@ export default function ProfilePage({currentEmployee}) {
   const [image, setImage] = useState(null)
 
   useEffect(() => {
-    firebase.initializeApp(firebaseConfig);
     firebase.storage().ref().child('/'+ currentEmployee.id+'.jpg')
     .getDownloadURL().then(url => setImage(url));
   }, [currentEmployee.id])
