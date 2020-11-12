@@ -121,7 +121,7 @@ export const getSchedule = async (monday) => {
 
 export const getEmployeeTimeOffs = async () => {
 
-        const response = await fetch(apiPath + 'employeeSchedule', {
+        const response = await fetch(apiPath + 'timeoffs', {
             method: 'GET',
             headers: {
                 Accept: 'application/json'
