@@ -68,9 +68,13 @@ export default function SchedulePage() {
 
   function availabilityToString(availability) {
     if (availability.off) {
-      return "Off";
+      return markStringModified("Off", availability.modified);
     }
-    return hourToAmPmString(availability.start) + " - " + hourToAmPmString(availability.end);
+    return markStringModified(hourToAmPmString(availability.start) + " - " + hourToAmPmString(availability.end), availability.modified);
+  }
+
+  function markStringModified(str, modified) {
+    return modified ? `[ ${str} ]` : str;
   }
 
   function hourToAmPmString(hour) {
