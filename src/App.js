@@ -14,6 +14,7 @@ import NoMatch, { ServerError } from './components/404page';
 import { Redirect } from 'react-router-dom';
 import { firebaseConfig } from './config';
 import firebase from 'firebase/app';
+import SubmitTimeOffPage from './components/SubmitTimeOffPage';
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -45,6 +46,7 @@ function App() {
         <Route exact path='/feedback' component={FeedbackPage} />
         <Route exact path='/newHire' component={NewEmployeePage} />
         <Route exact path='/feedbackList' component={FeedbackList} />
+        <Route exact path='/submitTimeoff' component={SubmitTimeOffPage} />
         <Route exact path='/404page' component={NoMatch} />
         <Route exact path='/error' component={ServerError} />
         <Redirect to='/404page'/>

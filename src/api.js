@@ -148,3 +148,51 @@ export const postEmployeeTimeOffs = async () => {
         }
         return await response.json();
 }
+
+export const getAllTimeOff = async () => {
+    if(isDemo) {
+        return employees
+    }
+        const response = await fetch(apiPath + 'employeeTimes', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json'
+            }
+        })
+        if (response.status === 500) {
+          throw new Error('500')
+        }
+        return await response.json();
+}
+
+export const approveTimeOff = async (time) => {
+
+    const response = await fetch(apiPath + 'update/approveTO', {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(time)
+    })
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return await response.json();
+}
+
+export const denyTimeOff = async (time) => {
+
+    const response = await fetch(apiPath + 'update/denyTO', {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(time)
+    })
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return await response.json();
+}
