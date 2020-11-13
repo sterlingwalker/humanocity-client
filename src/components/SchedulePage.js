@@ -95,7 +95,6 @@ export default function SchedulePage() {
     return result;
   }
 
-
   return (
     <MaterialTable
       icons={tableIcons}
@@ -108,7 +107,6 @@ export default function SchedulePage() {
         { title: 'Thursday', field: 'Thursday' },
         { title: 'Friday', field: 'Friday' },
         { title: 'Saturday', field: 'Saturday' },
-
         { title: 'Sunday', field: 'Sunday' }
       ]}
       data={employeeSchedule}
