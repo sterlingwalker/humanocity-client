@@ -128,7 +128,7 @@ export default function SchedulePage() {
                 }}
                 color="primary"
                 variant="contained"
-                style={{textTransform: 'none'}}
+                style={{textTransform: 'none', marginRight: 10}}
                 size="small"
               >
                 <ChevronLeft/> Previous Week
