@@ -12,11 +12,6 @@ import {
   Remove,
   ViewColumn} from '@material-ui/icons'
 import { Button } from '@material-ui/core'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Dialog from '@material-ui/core/Dialog'
 import { getSchedule } from '../api'
 import { useHistory } from 'react-router-dom'
 
@@ -36,10 +31,10 @@ const tableIcons = {
 
 export default function SchedulePage() {
   let history = useHistory();
-  const [open, setOpen] = useState();
+  const [monday, setMonday] = useState(getMonday());
   const [employeeSchedule, setSchedule] = useState([]);
   useEffect(() => {
-    refreshSchedule(mondayMaker(0));   // eslint-disable-next-line
+    refreshSchedule(getMonday());   // eslint-disable-next-line
   }, []);
 
   const refreshSchedule = (scheduleMonday) => {
@@ -79,72 +74,79 @@ export default function SchedulePage() {
 
   function hourToAmPmString(hour) {
     return (hour % 12) + (hour < 12 ? "A" : "P") + "M";
-}
+  }
 
-const dateMaker = (weeksOffset) => {
-  let monday = getMonday(new Date());
-  let offsetMonday = addDays(monday, weeksOffset * 7);
-  let offsetSunday = addDays(offsetMonday, 6);
-  return offsetMonday.toLocaleDateString() + ' to ' + offsetSunday.toLocaleDateString(); // Weeks are Monday to Sunday
-}
+  const mondayToDateRangeString = (monday) => {
+    let mondayDate = new Date(monday);
+    let sundayDate = addDays(mondayDate, 6);
+    return mondayDate.toLocaleDateString() + ' to ' + sundayDate.toLocaleDateString(); // Weeks are Monday to Sunday
+  }
 
-const mondayMaker = (weeksOffset) => {
-  return addDays(getMonday(new Date()), weeksOffset * 7);
-} 
+  function getMonday(date = new Date()) {
+    date = new Date(date);
+    let day = date.getDay();
+    let diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+    return new Date(date.setDate(diff));
+  }
 
-function getMonday(date) {
-  date = new Date(date);
-  let day = date.getDay();
-  let diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-  return new Date(date.setDate(diff));
-}
+  function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 
-function addDays(date, days) {
-  var result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
-const [dateString, setDateString] = useState(dateMaker(0));
+  const customHeaderStyle = {
+    backgroundColor: '#6C6FA5',
+    color: '#ffffff'
+  } 
 
   return (
     <MaterialTable
       icons={tableIcons}
-      title={'Employee Schedule for week of: ' + dateString}
+      title={'Employee Schedule for week of: ' + mondayToDateRangeString(monday)}
       columns={[
-        { title: 'Employee', field: 'Employee' },
-        { title: 'Monday', field: 'Monday'},
-        { title: 'Tuesday', field: 'Tuesday'},
-        { title: 'Wednesday', field: 'Wednesday'},
-        { title: 'Thursday', field: 'Thursday'},
-        { title: 'Friday', field: 'Friday'},
-        { title: 'Saturday', field: 'Saturday'},
-        { title: 'Sunday', field: 'Sunday'}
+        { title: 'Employee', field: 'Employee', headerStyle: customHeaderStyle},
+        { title: 'Monday', field: 'Monday', headerStyle: customHeaderStyle },
+        { title: 'Tuesday', field: 'Tuesday', headerStyle: customHeaderStyle },
+        { title: 'Wednesday', field: 'Wednesday', headerStyle: customHeaderStyle },
+        { title: 'Thursday', field: 'Thursday', headerStyle: customHeaderStyle },
+        { title: 'Friday', field: 'Friday', headerStyle: customHeaderStyle },
+        { title: 'Saturday', field: 'Saturday', headerStyle: customHeaderStyle },
+        { title: 'Sunday', field: 'Sunday', headerStyle: customHeaderStyle }
       ]}
       data={employeeSchedule}
       isLoading={employeeSchedule.length === 0}
       components={{
         Actions: props => (
           <React.Fragment>
-          <Button
-            onClick={(event) => setOpen(true)}
-            color="primary"
-            variant="contained"
-            style={{textTransform: 'none', marginRight: 15, marginLeft: 15}}
-            size="small"
-          >
-            Change Week
-          </Button>
-          <Dialog onClose={() => setOpen(false)} open={open}>
-          <DialogTitle>Select Week to change</DialogTitle>
-          <List>
-            {[0,1,2,3,4].map((weeksOffset) => (
-              <ListItem button onClick={() => {setDateString(dateMaker(weeksOffset)); refreshSchedule(mondayMaker(weeksOffset)); setOpen(false)}} key={weeksOffset}>
-                <ListItemText primary={dateMaker(weeksOffset)} />
-              </ListItem>
-            ))}
-          </List>
-          </Dialog>
+            <div  style={{display: "flex"}}>
+              <Button
+                onClick={() => {
+                  let previousMonday = addDays(monday, -7);
+                  setMonday(previousMonday);
+                  refreshSchedule(previousMonday);
+                }}
+                color="primary"
+                variant="contained"
+                style={{textTransform: 'none', marginRight: 10}}
+                size="small"
+              >
+                <ChevronLeft/> Previous Week
+              </Button>
+              <Button
+                onClick={() => {
+                  let nextMonday = addDays(monday, 7);
+                  setMonday(nextMonday);
+                  refreshSchedule(nextMonday);
+                }}
+                color="primary"
+                variant="contained"
+                style={{textTransform: 'none'}}
+                size="small"
+              >
+                Next Week <ChevronRight/>
+              </Button>
+            </div>
           </React.Fragment>
         )
       }}
