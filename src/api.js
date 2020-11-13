@@ -119,29 +119,30 @@ export const getSchedule = async (monday) => {
         return await response.json();
 }
 
-export const getEmployeeTimeOffs = async () => {
+export const requestTimeOff = async (time) => {
 
-        const response = await fetch(apiPath + 'employeeSchedule', {
-            method: 'GET',
+        const response = await fetch(apiPath + 'new/timeoff', {
+            method: 'POST',
             headers: {
-                Accept: 'application/json'
-            }
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(time)
         })
         if (response.status === 500) {
           throw new Error('500')
         }
-        return await response.json();
+        return response.text();
 }
 
-export const postEmployeeTimeOffs = async () => {
+export const getSingleEmployeeTime = async (id) => {
   
-        const response = await fetch(apiPath + 'employeeSchedule', {
-            method: 'POST',
+        const response = await fetch(apiPath + 'employeeTime/' + id, {
+            method: 'GET',
             headers: {
                 Accept: 'application/json', 
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify()
         })
         if (response.status === 500) {
           throw new Error('500')
