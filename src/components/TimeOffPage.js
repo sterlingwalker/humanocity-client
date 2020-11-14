@@ -12,8 +12,8 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-import { timeoff } from '../off'
 import { getEmployeeTimeOffs } from '../api'
+import { useHistory } from 'react-router'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -30,7 +30,8 @@ const tableIcons = {
   };
 
 const TimeOffPage = (props) => {
-  const [timeoff, setTimeOff] = useState([])
+  let history = useHistory();
+  const [timeoff, setTimeOff] = useState([]);
   useEffect(() => {
     getEmployeeTimeOffs().then(response => {
       let table = [];
@@ -45,7 +46,7 @@ const TimeOffPage = (props) => {
         table.push(row);
       }
       setTimeOff(table)
-    }).catch(() => history.push('/error')) /*push the error page here, reference the other components*/
+    }).catch(() => history.push('/error'))
   }, [history])
 
   const handleClick = (id) => {}
