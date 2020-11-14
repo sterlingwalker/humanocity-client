@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
 import { Button } from '@material-ui/core'
 import { 
@@ -12,7 +12,8 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-import { timeoff } from '../off'
+import { getEmployeeTimeOffs } from '../api'
+import { useHistory } from 'react-router'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -29,6 +30,24 @@ const tableIcons = {
   };
 
 const TimeOffPage = (props) => {
+  let history = useHistory();
+  const [timeoff, setTimeOff] = useState([]);
+  useEffect(() => {
+    getEmployeeTimeOffs().then(response => {
+      let table = [];
+      for (let index = 0; index < response.length; index++) {
+        const employee = response[index];
+        const start = (new Date(employee.start)).toLocaleDateString();
+        const end = (new Date(employee.end)).toLocaleDateString();
+        let row = {
+          Name: employee.firstName + " " + employee.lastName,
+          dateoff: start + ' - ' + end
+        };
+        table.push(row);
+      }
+      setTimeOff(table)
+    }).catch(() => history.push('/error'))
+  }, [history])
 
   const handleClick = (id) => {}
 
@@ -57,15 +76,7 @@ const TimeOffPage = (props) => {
             backgroundColor: '#6C6FA5',
             color: '#ffffff'
           }
-        },
-        {
-          title: 'Vacation Time Remaining',
-          field: 'hoursleft',
-          headerStyle: {
-            backgroundColor: '#6C6FA5',
-            color: '#ffffff'
-          }
-        },
+        },       
       ]}
       data={timeoff}
       actions={[

@@ -135,6 +135,22 @@ export const requestTimeOff = async (time) => {
         return response.text();
 }
 
+export const getEmployeeTimeOffs = async (time) => {
+
+    const response = await fetch(apiPath + 'timeoffs', {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(time)
+    })
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return response.json();
+}
+
 export const getSingleEmployeeTime = async (id) => {
   
         const response = await fetch(apiPath + 'employeeTime/' + id, {
