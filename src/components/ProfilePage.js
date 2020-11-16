@@ -86,6 +86,9 @@ export default function ProfilePage({currentEmployee}) {
       dept: document.getElementById('dept').value,
       email: document.getElementById('email').value,
       managerID: document.getElementById('managerId').value,
+      phoneNumber: document.getElementById('phoneNumber').value,
+      emergencyName: document.getElementById('emergencyName').value,
+      emergencyNumber: document.getElementById('emergencyNumber').value,
       address: {
           street: document.getElementById('street').value + 
           document.getElementById('street2').value,
@@ -185,9 +188,9 @@ export default function ProfilePage({currentEmployee}) {
               <TextField id="city" label="City" variant="outlined" defaultValue={currentEmployee.address.city} required/>
               <TextField id="state" label="State" variant="outlined" defaultValue={currentEmployee.address.state} required />
               <TextField id="zipcode" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.address.zipcode} required />
-              <TextField id="todo?" label="Phone Number" variant="outlined" defaultValue={currentEmployee.phoneNumber} required />
-              <TextField id="todo?" label="Emergency Contact Name" variant="outlined" defaultValue={currentEmployee.emergencyName} required />
-              <TextField id="todo?" label="Emergency Contact Number" variant="outlined" defaultValue={currentEmployee.emergencyNumber} required />
+              <TextField id="phoneNumber" label="Phone Number" variant="outlined" defaultValue={currentEmployee.phoneNumber} required />
+              <TextField id="emergencyName" label="Emergency Contact Name" variant="outlined" defaultValue={currentEmployee.emergencyName} required />
+              <TextField id="emergencyNumber" label="Emergency Contact Number" variant="outlined" defaultValue={currentEmployee.emergencyNumber} required />
 
               <TextField id="id" label="ID" variant="outlined" defaultValue={currentEmployee.id} required />
               <TextField id="firstName" label="First Name" variant="outlined" defaultValue={currentEmployee.firstName} required />
