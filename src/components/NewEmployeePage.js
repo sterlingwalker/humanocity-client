@@ -75,6 +75,9 @@ const NewEmployeePage = props => {
             dept: document.getElementById('dept').value,
             email: document.getElementById('email').value,
             managerID: document.getElementById('managerId').value,
+            phoneNumber: document.getElementById('phone').value,
+            emergencyName: document.getElementById('emcName').value,
+            emergencyNumber: document.getElementById('emcNumber').value,
             address: {
                 street: document.getElementById('street').value + 
                 document.getElementById('street2').value,

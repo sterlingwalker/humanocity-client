@@ -184,7 +184,7 @@ export default function ProfilePage({currentEmployee}) {
           <form className={classes.form} noValidate autoComplete="off">
             <div>
               <TextField id="street" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.address.street} required/>
-              <TextField id="street2" label="Street Address 2" variant="outlined" defaultValue={"TODO"} />
+              <TextField id="street2" label="Street Address 2" variant="outlined"/>
               <TextField id="city" label="City" variant="outlined" defaultValue={currentEmployee.address.city} required/>
               <TextField id="state" label="State" variant="outlined" defaultValue={currentEmployee.address.state} required />
               <TextField id="zipcode" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.address.zipcode} required />
