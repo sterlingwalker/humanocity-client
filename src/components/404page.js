@@ -4,7 +4,7 @@ import HomePage from './HomePage'
 import { Route } from 'react-router'
 import { Redirect } from 'react-router-dom';
 
-class Foo extends Component {
+class NoMatch extends Component {
   state = {
     redirect: false
   }
@@ -43,4 +43,4 @@ export const ServerError = ({ history }) => {
   );
 };
 
-export default Foo;
+export default NoMatch;
