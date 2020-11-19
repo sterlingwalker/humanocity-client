@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
 import { Button } from '@material-ui/core'
 import { 
@@ -12,7 +12,7 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-import { feedbackList } from '../FList'
+import { getAllFeedback, getAllEmployees } from '../api'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -29,6 +29,19 @@ const tableIcons = {
   };
 
 const FeedbackList = (props) => {
+  const [feedbackList, setFeedbackList] = useState([]);
+
+  useEffect(() => {
+    getAllFeedback().then(response => {
+      let feedbacks = response;
+      getAllEmployees().then(names => {
+        setFeedbackList(feedbacks.map(feedback => {
+          const name = names.find(nm => nm.id === feedback.employeeId);
+          return {...feedback, Name: name.firstName + ' ' + name.lastName};
+        }))
+      })
+    })
+  }, [])
 
   const handleClick = (id) => {}
 
@@ -52,7 +65,7 @@ const FeedbackList = (props) => {
         },
         {
           title: 'Category',
-          field: 'Category',
+          field: 'type',
           headerStyle: {
             backgroundColor: '#6C6FA5',
             color: '#ffffff'

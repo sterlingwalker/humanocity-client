@@ -1,4 +1,5 @@
 import { employees } from './demo';
+import { feedbackList } from './FList';
 const apiPath = '/hr-server/api/v1/';
 
 const isDemo = false; //Change to true for demo data
@@ -212,4 +213,20 @@ export const denyTimeOff = async (time) => {
       throw new Error('500')
     }
     return await response.json();
+}
+
+export const getAllFeedback = async () => {
+    if(isDemo) {
+        return feedbackList;
+    }
+        const response = await fetch(apiPath + 'feedbackList', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json'
+            }
+        })
+        if (response.status === 500) {
+          throw new Error('500')
+        }
+        return await response.json();
 }

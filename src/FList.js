@@ -2,18 +2,18 @@
 export const feedbackList = [
     {
         "Name": "Steven Adams",
-        "Category": "Complaint",
+        "type": "Complaint",
     },
     {
         "Name": "Jennifer Stone",
-        "Category": "Request",
+        "type": "Request",
     },
     {
         "Name": "Trenton Jackson",
-        "Category": "Request",
+        "type": "Request",
     },
     {
         "Name": "Sara Jones",
-        "Category": "Suggestion",
+        "type": "Suggestion",
     }
 ];
