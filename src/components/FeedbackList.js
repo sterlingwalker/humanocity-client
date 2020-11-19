@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
-import { Button } from '@material-ui/core'
+import { Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
 import { 
   AddBox,
   Clear,
@@ -30,6 +30,9 @@ const tableIcons = {
 
 const FeedbackList = (props) => {
   const [feedbackList, setFeedbackList] = useState([]);
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
+  const [open, setOpen] = useState(false);
+
 
   useEffect(() => {
     getAllFeedback().then(response => {
@@ -37,15 +40,22 @@ const FeedbackList = (props) => {
       getAllEmployees().then(names => {
         setFeedbackList(feedbacks.map(feedback => {
           const name = names.find(nm => nm.id === feedback.employeeId);
-          return {...feedback, Name: name.firstName + ' ' + name.lastName};
+          return {...feedback, Name: name.firstName + ' ' + name.lastName, email: name.email};
         }))
       })
     })
   }, [])
 
-  const handleClick = (id) => {}
+  const handleClick = (id) => {
+    setSelectedFeedback(feedbackList.find(fb => fb.feedbackId === id))
+    setOpen(true);
+  }
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
+    <React.Fragment>
     <MaterialTable
       icons={tableIcons}
       localization={{
@@ -85,7 +95,7 @@ const FeedbackList = (props) => {
               View
             </Button>),
           tooltip: 'View feedback',
-          onClick: (event, rowData) => handleClick(rowData.ID)
+          onClick: (event, rowData) => handleClick(rowData.feedbackId)
         },
         {
           icon: props => (
@@ -108,6 +118,27 @@ const FeedbackList = (props) => {
           color: '#ffffff'
       }}}
     />
+    {selectedFeedback === null ? <div/> :
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+      {`${selectedFeedback.type} from ${selectedFeedback.Name}`}
+    </DialogTitle>
+    <DialogContent dividers>
+      <Typography gutterBottom>
+        {selectedFeedback.description}
+      </Typography>
+    </DialogContent>
+    <DialogActions>
+      <Button autoFocus onClick={handleClose} color="primary">
+        Close
+      </Button>
+      <Button autoFocus  variant='contained' onClick={()=> window.open("mailto:" + selectedFeedback.email, "_blank")} color="primary">
+        Email Employee
+      </Button>
+    </DialogActions>
+  </Dialog>
+}
+  </React.Fragment>
   )
 }
 
