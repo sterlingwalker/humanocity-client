@@ -13,6 +13,7 @@ import {
   Remove,
   ViewColumn} from '@material-ui/icons'
 import { getAllFeedback, getAllEmployees } from '../api'
+import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -32,6 +33,7 @@ const FeedbackList = (props) => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [selectedFeedback, setSelectedFeedback] = useState(null);
   const [open, setOpen] = useState(false);
+  let history = useHistory();
 
 
   useEffect(() => {
@@ -43,8 +45,8 @@ const FeedbackList = (props) => {
           return {...feedback, Name: name.firstName + ' ' + name.lastName, email: name.email};
         }))
       })
-    })
-  }, [])
+    }).catch(err => history.push('/error'))
+  }, [history])
 
   const handleClick = (id) => {
     setSelectedFeedback(feedbackList.find(fb => fb.feedbackId === id))

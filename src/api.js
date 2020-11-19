@@ -230,3 +230,19 @@ export const getAllFeedback = async () => {
         }
         return await response.json();
 }
+
+export const submitFeedback = async (feedback) => {
+
+        const response = await fetch(apiPath + 'new/feedback', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(feedback)
+        })
+        if (response.status === 500) {
+          throw new Error('500')
+        }
+        return await response.text();
+}
