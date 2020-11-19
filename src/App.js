@@ -15,9 +15,11 @@ import { Redirect } from 'react-router-dom';
 import { firebaseConfig } from './config';
 import firebase from 'firebase/app';
 import SubmitTimeOffPage from './components/SubmitTimeOffPage';
+import EmployeeOnlyPage from './components/EmployeeOnlyPage';
 
 function App() {
   const [tab, setTab] = useState('/')
+  const [employeeMode, setEmployeeMode] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   let history = useHistory()
 
@@ -32,9 +34,10 @@ function App() {
     }
   },[history.location])
 
+  if(!employeeMode) {
   return (
     <div>
-      <NavigationBar currentTab={tab} />
+      <NavigationBar currentTab={tab} switchMode={setEmployeeMode} />
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <React.Fragment>
         <Switch>
@@ -54,6 +57,23 @@ function App() {
       </React.Fragment>
     </div>
   );
+  }
+  else {
+    return (
+      <React.Fragment>
+      <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
+      <Switch>
+      <Route exact path='/' component={EmployeeOnlyPage} />
+      <Route exact path='/schedule' component={SchedulePage} />
+      <Route exact path='/feedback' component={FeedbackPage} />
+      <Route exact path='/submitTimeoff' component={SubmitTimeOffPage} />
+      <Route exact path='/404page' component={NoMatch} />
+      <Route exact path='/error' component={ServerError} />
+      <Redirect to='/404page'/>
+      </Switch>
+    </React.Fragment>
+    )
+  }
 }
 
 export default withRouter(App);

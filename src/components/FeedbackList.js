@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
-import { Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
+import { Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Snackbar } from '@material-ui/core'
 import { 
   AddBox,
   Clear,
@@ -12,7 +12,7 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-import { getAllFeedback, getAllEmployees } from '../api'
+import { getAllFeedback, getAllEmployees, dismissFeedback } from '../api'
 import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
@@ -33,6 +33,8 @@ const FeedbackList = (props) => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [selectedFeedback, setSelectedFeedback] = useState(null);
   const [open, setOpen] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+  const [message, setMessage] = useState('');
   let history = useHistory();
 
 
@@ -51,6 +53,16 @@ const FeedbackList = (props) => {
   const handleClick = (id) => {
     setSelectedFeedback(feedbackList.find(fb => fb.feedbackId === id))
     setOpen(true);
+  }
+
+  const handleDismiss = (id) => {
+    dismissFeedback(id).then(response => {
+      setMessage(response);
+      setDismissed(true);
+      if (response.includes('success')) {
+        setFeedbackList(feedbackList.filter(fb => fb.feedbackId !== id));
+      }
+    }).catch(err => history.push('/error'))
   }
 
   const handleClose = () => {
@@ -110,7 +122,7 @@ const FeedbackList = (props) => {
               Dismiss
               </Button>),
           tooltip: 'Dismiss',
-          onClick: (event, rowData) => handleClick(rowData.ID)
+          onClick: (event, rowData) => handleDismiss(rowData.feedbackId)
         }
       ]}
       options={{
@@ -140,6 +152,16 @@ const FeedbackList = (props) => {
     </DialogActions>
   </Dialog>
 }
+        <Snackbar
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+            }}
+            open={dismissed}
+            autoHideDuration={6000}
+            onClose={() => setDismissed(false)}
+            message={message}
+        />
   </React.Fragment>
   )
 }
