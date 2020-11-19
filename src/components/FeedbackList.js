@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import MaterialTable from 'material-table'
-import { Button } from '@material-ui/core'
+import { Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
 import { 
   AddBox,
   Clear,
@@ -12,7 +12,8 @@ import {
   ArrowDownward,
   Remove,
   ViewColumn} from '@material-ui/icons'
-import { feedbackList } from '../FList'
+import { getAllFeedback, getAllEmployees } from '../api'
+import { useHistory } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -29,10 +30,34 @@ const tableIcons = {
   };
 
 const FeedbackList = (props) => {
+  const [feedbackList, setFeedbackList] = useState([]);
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
+  const [open, setOpen] = useState(false);
+  let history = useHistory();
 
-  const handleClick = (id) => {}
 
+  useEffect(() => {
+    getAllFeedback().then(response => {
+      let feedbacks = response;
+      getAllEmployees().then(names => {
+        setFeedbackList(feedbacks.map(feedback => {
+          const name = names.find(nm => nm.id === feedback.employeeId);
+          return {...feedback, Name: name.firstName + ' ' + name.lastName, email: name.email};
+        }))
+      })
+    }).catch(err => history.push('/error'))
+  }, [history])
+
+  const handleClick = (id) => {
+    setSelectedFeedback(feedbackList.find(fb => fb.feedbackId === id))
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
+    <React.Fragment>
     <MaterialTable
       icons={tableIcons}
       localization={{
@@ -52,7 +77,7 @@ const FeedbackList = (props) => {
         },
         {
           title: 'Category',
-          field: 'Category',
+          field: 'type',
           headerStyle: {
             backgroundColor: '#6C6FA5',
             color: '#ffffff'
@@ -72,7 +97,7 @@ const FeedbackList = (props) => {
               View
             </Button>),
           tooltip: 'View feedback',
-          onClick: (event, rowData) => handleClick(rowData.ID)
+          onClick: (event, rowData) => handleClick(rowData.feedbackId)
         },
         {
           icon: props => (
@@ -95,6 +120,27 @@ const FeedbackList = (props) => {
           color: '#ffffff'
       }}}
     />
+    {selectedFeedback === null ? <div/> :
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+      {`${selectedFeedback.type} from ${selectedFeedback.Name}`}
+    </DialogTitle>
+    <DialogContent dividers>
+      <Typography gutterBottom>
+        {selectedFeedback.description}
+      </Typography>
+    </DialogContent>
+    <DialogActions>
+      <Button autoFocus onClick={handleClose} color="primary">
+        Close
+      </Button>
+      <Button autoFocus  variant='contained' onClick={()=> window.open("mailto:" + selectedFeedback.email, "_blank")} color="primary">
+        Email Employee
+      </Button>
+    </DialogActions>
+  </Dialog>
+}
+  </React.Fragment>
   )
 }
 
