@@ -246,3 +246,18 @@ export const submitFeedback = async (feedback) => {
         }
         return await response.text();
 }
+
+export const dismissFeedback = async (id) => {
+
+    const response = await fetch(apiPath + 'update/feedback/' + id, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return await response.text();
+}
