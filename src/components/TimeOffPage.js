@@ -17,7 +17,7 @@ import {
   ViewColumn
 } from '@material-ui/icons'
 import Alert from '@material-ui/lab/Alert';
-import { getEmployeeTimeOffs, approveTimeOff, denyTimeOff, removeTimeOff } from '../api'
+import { getEmployeeTimeOffs, approveTimeOff, denyTimeOff } from '../api'
 import { useHistory } from 'react-router'
 
 const tableIcons = {
@@ -151,21 +151,6 @@ const TimeOffPage = (props) => {
             tooltip: 'Approve Request',
             onClick: (event, rowData) => {
               handleTimeOffPromise(approveTimeOff(rowData.timeOffId));
-            }
-          },
-          {
-            icon: props => (
-              <Button
-                color="secondary"
-                variant="contained"
-                style={{backgroundColor: 'blue'}}
-                size="small"
-              >
-                Remove
-              </Button>),
-            tooltip: 'Remove Request',
-            onClick: (event, rowData) => {
-              handleTimeOffPromise(removeTimeOff(rowData.timeOffId));
             }
           }
         ]}

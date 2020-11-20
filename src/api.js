@@ -215,22 +215,6 @@ export const denyTimeOff = async (timeOffId) => {
     return await response.text();
 }
 
-export const removeTimeOff = async (timeOffId) => {
-
-    const response = await fetch(apiPath + 'update/removeTO', {
-        method: 'PATCH',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: timeOffId
-    })
-    if (response.status === 500) {
-      throw new Error('500')
-    }
-    return await response.text();
-}
-
 export const getAllFeedback = async () => {
     if(isDemo) {
         return feedbackList;
