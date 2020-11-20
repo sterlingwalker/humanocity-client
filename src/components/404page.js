@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import HomePage from './HomePage'
 import { Route } from 'react-router'
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class NoMatch extends Component {
   state = {
@@ -22,8 +23,7 @@ class NoMatch extends Component {
       ? <Redirect to="/" />
       : <Alert severity="error">
       Oops! The page that you are trying to reach doesn't exist. Redirecting you to the <span style={{ color: "blue" }} onClick={() => <Route exact path='/' component={HomePage} />}>
-        {" "}
-        Home Page{" "}
+        <Link to="/">Home Page</Link>
       </span>
     </Alert>
   }
