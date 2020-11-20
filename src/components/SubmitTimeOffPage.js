@@ -14,10 +14,8 @@ import { Card,
    CardActions,
    CardContent,
    CardHeader,
-   Switch,
    Typography,
    CardMedia,
-   FormControlLabel,
    LinearProgress } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
@@ -64,10 +62,9 @@ export default function SubmitTimeOffPage() {
   const [updatePrompt, setUpdatePrompt] = useState({open: false, severity: 'error', message: ''});
   const [selectedDateStart, setSelectedDateStart] = useState(new Date());
   const [selectedDateEnd, setSelectedDateEnd] = useState(new Date());
-  const [startFullDay, setStartFullDay] = useState(false)
-  const [endFullDay, setEndFullDay] = useState(false)
-  const [image, setImage] = useState('https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png')
-  const [currentEmployee, setCurrentEmployee] = useState({firstName: 'N/A', lastName: 'N/A', email: 'N/A', position: 'N/A', hoursRemaining: 0, totalHours: 0})
+  const [fullDays, setFullDays] = useState(false);
+  const [image, setImage] = useState('https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png');
+  const [currentEmployee, setCurrentEmployee] = useState({firstName: 'N/A', lastName: 'N/A', email: 'N/A', position: 'N/A', hoursRemaining: 0, totalHours: 0});
 
   const classes = useStyles();
 
@@ -80,11 +77,12 @@ export default function SubmitTimeOffPage() {
   }
 
   const handleStartDateChange = (date) => {
+    setFullDays(new Date(date).toDateString() !== selectedDateEnd.toDateString());
     setSelectedDateStart(date);
   };
 
   const handleEndDateChange = (date) => {
-    console.log(toServerString(date))
+    setFullDays(new Date(date).toDateString() !== selectedDateStart.toDateString());
     setSelectedDateEnd(date);
   };
 
@@ -107,12 +105,11 @@ export default function SubmitTimeOffPage() {
       start: toServerString(selectedDateStart),
       end: toServerString(selectedDateEnd)
     }
-    if (startFullDay) {
-      data.start = data.start.substring(0, 11) + '00:00:00'
+    if (fullDays) {
+      data.start = data.start.substring(0, 11) + '00:00:00';
+      data.end = data.end.substring(0, 11) + '00:00:00';
     }
-    if (endFullDay) {
-      data.end = data.end.substring(0, 11) + '00:00:00'
-    }
+    console.log(data);
     requestTimeOff(data).then(response => {
       if(response.includes('Invalid')){
         setUpdatePrompt({open: true, severity: 'error', message: response })
@@ -187,6 +184,7 @@ export default function SubmitTimeOffPage() {
                          label="Date picker dialog"
                          format="MM/dd/yyyy"
                          value={selectedDateStart}
+                         minDate={new Date()}
                          onChange={handleStartDateChange}
                          KeyboardButtonProps={{
                          'aria-label': 'change date',
@@ -196,9 +194,9 @@ export default function SubmitTimeOffPage() {
                          margin="normal"
                          id="time-picker"
                          label="Time picker"
-                         value={selectedDateStart}
+                         value={fullDays ? new Date(selectedDateStart.toLocaleDateString() + " 12:00 AM") : selectedDateStart}
                          onChange={handleStartDateChange}
-                         disabled={startFullDay}
+                         disabled={fullDays}
                          KeyboardButtonProps={{
                          'aria-label': 'change time',
                          }}
@@ -206,18 +204,6 @@ export default function SubmitTimeOffPage() {
                       </Grid>
                    </MuiPickersUtilsProvider>
                 </CardActions>
-                <FormControlLabel
-                control={
-                <Switch
-                   checked={startFullDay}
-                   onChange={() =>
-                setStartFullDay(!startFullDay)}
-                name="checkedB"
-                color="primary"
-                />
-                }
-                label="Full Day"
-                />
              </Card>
              <Card className={classes.card}>
                 <CardHeader title='Time Off End Date'/>
@@ -230,6 +216,7 @@ export default function SubmitTimeOffPage() {
                          label="Date picker dialog"
                          format="MM/dd/yyyy"
                          value={selectedDateEnd}
+                         minDate={selectedDateStart}
                          onChange={handleEndDateChange}
                          KeyboardButtonProps={{
                          'aria-label': 'change date',
@@ -239,9 +226,9 @@ export default function SubmitTimeOffPage() {
                          margin="normal"
                          id="time-picker"
                          label="Time picker"
-                         value={selectedDateEnd}
+                         value={fullDays ? new Date(selectedDateEnd.toLocaleDateString() + " 11:59 PM")  : selectedDateEnd}
                          onChange={handleEndDateChange}
-                         disabled={endFullDay}
+                         disabled={fullDays}
                          KeyboardButtonProps={{
                          'aria-label': 'change time',
                          }}
@@ -249,18 +236,6 @@ export default function SubmitTimeOffPage() {
                       </Grid>
                    </MuiPickersUtilsProvider>
                 </CardActions>
-                <FormControlLabel
-                control={
-                <Switch
-                   checked={endFullDay}
-                   onChange={() =>
-                setEndFullDay(!endFullDay)}
-                name="checkedB"
-                color="primary"
-                />
-                }
-                label="Full Day"
-                />
              </Card>
           </Grid>
           <Button color='primary' onClick={handleSubmit} variant='outlined'>Submit</Button>
