@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles'
-import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
+import { AppBar, Toolbar, Tab, Tabs, Button } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import EventNote from '@material-ui/icons/Event'
 import AlarmIcon from '@material-ui/icons/Alarm'
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     },
     appbar: {
       backgroundColor: '#6C6FA5'
+    },
+    button: {
+      color: 'white'
     }
   });
 
@@ -41,6 +44,7 @@ const NavigationBar = (props) => {
         <Tab className={classes.tab} icon={<EventNote />} value='/schedule' tabIndex={3}/>
         <Tab className={classes.tab} icon={<CommentIcon />} value='/feedbackList' tabIndex={4}/>
         </Tabs>
+        <Button className={classes.button} onClick={()=> props.switchMode(true)}>Employee Mode</Button>
         </Toolbar>
       </AppBar>
     )

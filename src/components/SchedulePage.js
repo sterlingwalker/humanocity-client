@@ -95,26 +95,29 @@ export default function SchedulePage() {
     return result;
   }
 
-  const customHeaderStyle = {
-    backgroundColor: '#6C6FA5',
-    color: '#ffffff'
-  } 
-
   return (
     <MaterialTable
       icons={tableIcons}
       title={'Employee Schedule for week of: ' + mondayToDateRangeString(monday)}
       columns={[
-        { title: 'Employee', field: 'Employee', headerStyle: customHeaderStyle},
-        { title: 'Monday', field: 'Monday', headerStyle: customHeaderStyle },
-        { title: 'Tuesday', field: 'Tuesday', headerStyle: customHeaderStyle },
-        { title: 'Wednesday', field: 'Wednesday', headerStyle: customHeaderStyle },
-        { title: 'Thursday', field: 'Thursday', headerStyle: customHeaderStyle },
-        { title: 'Friday', field: 'Friday', headerStyle: customHeaderStyle },
-        { title: 'Saturday', field: 'Saturday', headerStyle: customHeaderStyle },
-        { title: 'Sunday', field: 'Sunday', headerStyle: customHeaderStyle }
+        { title: 'Employee', field: 'Employee' },
+        { title: 'Monday', field: 'Monday' },
+        { title: 'Tuesday', field: 'Tuesday' },
+        { title: 'Wednesday', field: 'Wednesday' },
+        { title: 'Thursday', field: 'Thursday' },
+        { title: 'Friday', field: 'Friday' },
+        { title: 'Saturday', field: 'Saturday' },
+        { title: 'Sunday', field: 'Sunday' }
       ]}
       data={employeeSchedule}
+      options={{
+        headerStyle: {
+          backgroundColor: '#6C6FA5',
+          color: '#ffffff',
+          fontSize: '1.1em'
+        },
+        pageSize: 20
+      }}
       isLoading={employeeSchedule.length === 0}
       components={{
         Actions: props => (

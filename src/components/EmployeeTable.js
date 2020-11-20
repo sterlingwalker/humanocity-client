@@ -73,6 +73,7 @@ const handleClick = (id) => {
         },
       ]}
       data={employees}
+      isLoading={employees.length === 0}
       actions={[
         {
           icon: 'view/manage',
@@ -115,7 +116,13 @@ const handleClick = (id) => {
         }
       }}
       options={{
-        actionsColumnIndex: -1
+        headerStyle: {
+          backgroundColor: '#6C6FA5',
+          color: '#ffffff',
+          fontSize: '1.1em'
+        },
+        actionsColumnIndex: -1,
+        pageSize: 20
       }}
     />
   )

@@ -183,7 +183,7 @@ export const getAllTimeOff = async () => {
         return await response.json();
 }
 
-export const approveTimeOff = async (time) => {
+export const approveTimeOff = async (timeOffId) => {
 
     const response = await fetch(apiPath + 'update/approveTO', {
         method: 'PATCH',
@@ -191,15 +191,15 @@ export const approveTimeOff = async (time) => {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(time)
+        body: timeOffId
     })
     if (response.status === 500) {
       throw new Error('500')
     }
-    return await response.json();
+    return await response.text();
 }
 
-export const denyTimeOff = async (time) => {
+export const denyTimeOff = async (timeOffId) => {
 
     const response = await fetch(apiPath + 'update/denyTO', {
         method: 'PATCH',
@@ -207,12 +207,12 @@ export const denyTimeOff = async (time) => {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(time)
+        body: timeOffId
     })
     if (response.status === 500) {
       throw new Error('500')
     }
-    return await response.json();
+    return await response.text();
 }
 
 export const getAllFeedback = async () => {
@@ -245,4 +245,19 @@ export const submitFeedback = async (feedback) => {
           throw new Error('500')
         }
         return await response.text();
+}
+
+export const dismissFeedback = async (id) => {
+
+    const response = await fetch(apiPath + 'update/feedback/' + id, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+    if (response.status === 500) {
+      throw new Error('500')
+    }
+    return await response.text();
 }
