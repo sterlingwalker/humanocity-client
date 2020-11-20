@@ -129,8 +129,11 @@ const FeedbackList = (props) => {
         actionsColumnIndex: -1,
         headerStyle: {
           backgroundColor: '#6C6FA5',
-          color: '#ffffff'
-      }}}
+          color: '#ffffff',
+          fontSize: '1.1em'
+        },
+        pageSize: 20
+      }}
     />
     {selectedFeedback === null ? <div/> :
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
