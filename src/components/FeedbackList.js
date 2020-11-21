@@ -44,6 +44,9 @@ const FeedbackList = (props) => {
       getAllEmployees().then(names => {
         setFeedbackList(feedbacks.map(feedback => {
           const name = names.find(nm => nm.id === feedback.employeeId);
+          if (name = null) {
+            return {...feedback, Name: '[Terminated Employee]', email: ''};
+          }
           return {...feedback, Name: name.firstName + ' ' + name.lastName, email: name.email};
         }))
       })
