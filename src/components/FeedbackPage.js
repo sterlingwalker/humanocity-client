@@ -83,11 +83,10 @@ export default function FeedbackPage() {
       description: text
     }
     submitFeedback(feedback).then(response => {
-      if(response.includes('added')){
+      if(response.includes('Thanks')){
         setUpdatePrompt({open: true, severity: 'success', message: response})
       } else {
-        setUpdatePrompt({open: true, severity: 'error', message: response })
-
+        setUpdatePrompt({open: true, severity: 'error', message: response})
       }
     }).catch(err => history.push('/error'));
   }
