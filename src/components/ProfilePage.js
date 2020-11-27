@@ -90,8 +90,8 @@ export default function ProfilePage({currentEmployee}) {
       emergencyName: document.getElementById('emergencyName').value,
       emergencyNumber: document.getElementById('emergencyNumber').value,
       address: {
-          street: document.getElementById('street').value + 
-          document.getElementById('street2').value,
+          street: document.getElementById('street').value,
+          street2: document.getElementById('street2').value,
           city: document.getElementById('city').value,
           state: document.getElementById('state').value,
           zipcode: document.getElementById('zipcode').value
@@ -184,7 +184,7 @@ export default function ProfilePage({currentEmployee}) {
           <form className={classes.form} noValidate autoComplete="off">
             <div>
               <TextField id="street" label="Street Address 1" variant="outlined" defaultValue={currentEmployee.address.street} required/>
-              <TextField id="street2" label="Street Address 2" variant="outlined"/>
+              <TextField id="street2" label="Street Address 2" variant="outlined" defaultValue={currentEmployee.address.street2}/>
               <TextField id="city" label="City" variant="outlined" defaultValue={currentEmployee.address.city} required/>
               <TextField id="state" label="State" variant="outlined" defaultValue={currentEmployee.address.state} required />
               <TextField id="zipcode" label="ZIP Code" variant="outlined" defaultValue={currentEmployee.address.zipcode} required />
