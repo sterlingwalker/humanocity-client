@@ -79,8 +79,8 @@ const NewEmployeePage = props => {
             emergencyName: document.getElementById('emcName').value,
             emergencyNumber: document.getElementById('emcNumber').value,
             address: {
-                street: document.getElementById('street').value + 
-                document.getElementById('street2').value,
+                street: document.getElementById('street').value,
+                street2: document.getElementById('street2').value,
                 city: document.getElementById('city').value,
                 state: document.getElementById('state').value,
                 zipcode: document.getElementById('zipcode').value

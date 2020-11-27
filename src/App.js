@@ -16,6 +16,7 @@ import { firebaseConfig } from './config';
 import firebase from 'firebase/app';
 import SubmitTimeOffPage from './components/SubmitTimeOffPage';
 import EmployeeOnlyPage from './components/EmployeeOnlyPage';
+import EmployeeNavBar from './components/EmployeeNavBar';
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -61,6 +62,7 @@ function App() {
   else {
     return (
       <React.Fragment>
+      <EmployeeNavBar currentTab={tab} />
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <Switch>
       <Route exact path='/' component={EmployeeOnlyPage} />
