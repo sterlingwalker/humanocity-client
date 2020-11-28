@@ -17,6 +17,7 @@ import firebase from 'firebase/app';
 import SubmitTimeOffPage from './components/SubmitTimeOffPage';
 import EmployeeOnlyPage from './components/EmployeeOnlyPage';
 import EmployeeNavBar from './components/EmployeeNavBar';
+import { redirects } from './demo';
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -38,7 +39,7 @@ function App() {
   if(!employeeMode) {
   return (
     <div>
-      <NavigationBar currentTab={tab} switchMode={setEmployeeMode} />
+      <NavigationBar currentTab={tab} switchMode={setEmployeeMode} currentMode={employeeMode} />
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <React.Fragment>
         <Switch>
@@ -62,7 +63,7 @@ function App() {
   else {
     return (
       <React.Fragment>
-      <EmployeeNavBar currentTab={tab} />
+      <EmployeeNavBar currentTab={tab} switchMode={setEmployeeMode} currentMode={employeeMode} />
       <div style={{marginTop: 5 +'em' /* Add spacing between navbar and page contents */}} />
       <Switch>
       <Route exact path='/' component={EmployeeOnlyPage} />
@@ -71,6 +72,7 @@ function App() {
       <Route exact path='/submitTimeoff' component={SubmitTimeOffPage} />
       <Route exact path='/404page' component={NoMatch} />
       <Route exact path='/error' component={ServerError} />
+      {redirects.map(redirect => <Redirect path={redirect} to='/' />)}
       <Redirect to='/404page'/>
       </Switch>
     </React.Fragment>
