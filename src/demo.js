@@ -220,10 +220,15 @@ export const employeeTimeOffs = [
     },
 ];
 
-export const redirects = [
+export const employeeModeRedirects = [
     "/timeoff",
     "/employee",
     "/employees",
     "/newHire",
-    "/feedbackList",
-]
+    "/feedbackList"
+];
+
+export const hrModeRedirects = [
+    "/feedback",
+    "/submitTimeoff"
+];
