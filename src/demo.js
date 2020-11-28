@@ -219,3 +219,11 @@ export const employeeTimeOffs = [
         ]
     },
 ];
+
+export const redirects = [
+    "/timeoff",
+    "/employee",
+    "/employees",
+    "/newHire",
+    "/feedbackList",
+]

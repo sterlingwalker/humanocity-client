@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles'
-import { AppBar, Toolbar, Tab, Tabs } from '@material-ui/core'
+import { AppBar, Toolbar, Tab, Tabs, Switch, FormControlLabel } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import EventNote from '@material-ui/icons/Event'
 import AlarmIcon from '@material-ui/icons/Alarm'
@@ -42,6 +42,16 @@ const EmployeeNavBar = (props) => {
         <Tab className={classes.tab} icon={<EventNote />} value='/schedule' tabIndex={2}/>
         <Tab className={classes.tab} icon={<CommentIcon />} value='/feedback' tabIndex={3}/>
         </Tabs>
+        <FormControlLabel
+        control={
+          <Switch
+            checked={props.currentMode}
+            onChange={()=> props.switchMode(false)}
+            color="default"
+          />
+        }
+        label="Employee Mode"
+      />
         </Toolbar>
       </AppBar>
     )
