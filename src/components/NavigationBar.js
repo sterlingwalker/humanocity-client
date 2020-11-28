@@ -45,11 +45,12 @@ const NavigationBar = (props) => {
         <Tab className={classes.tab} icon={<CommentIcon />} value='/feedbackList' tabIndex={4}/>
         </Tabs>
         <FormControlLabel
+        style={{marginLeft: 'auto'}}
         control={
           <Switch
             checked={props.currentMode}
             onChange={()=> props.switchMode(true)}
-            color="default"
+            color="secondary"
           />
         }
         label="Employee Mode"

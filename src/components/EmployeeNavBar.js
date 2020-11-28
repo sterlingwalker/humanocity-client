@@ -43,11 +43,12 @@ const EmployeeNavBar = (props) => {
         <Tab className={classes.tab} icon={<CommentIcon />} value='/feedback' tabIndex={3}/>
         </Tabs>
         <FormControlLabel
+        style={{marginLeft: 'auto'}}
         control={
           <Switch
             checked={props.currentMode}
             onChange={()=> props.switchMode(false)}
-            color="default"
+            color="secondary"
           />
         }
         label="Employee Mode"
