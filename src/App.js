@@ -17,7 +17,7 @@ import firebase from 'firebase/app';
 import SubmitTimeOffPage from './components/SubmitTimeOffPage';
 import EmployeeOnlyPage from './components/EmployeeOnlyPage';
 import EmployeeNavBar from './components/EmployeeNavBar';
-import { redirects } from './demo';
+import { employeeModeRedirects, hrModeRedirects } from './demo';
 
 function App() {
   const [tab, setTab] = useState('/')
@@ -48,12 +48,11 @@ function App() {
         <Route exact path='/employee' render={(props) => selectedEmployee !== null ? <ProfilePage {...props} currentEmployee={selectedEmployee} /> : <Redirect to='/employees'/>}  />
         <Route exact path='/employees' render={(props) => <EmployeeTable {...props} clicked={setSelectedEmployee} />} />
         <Route exact path='/schedule' component={SchedulePage} />
-        <Route exact path='/feedback' component={FeedbackPage} />
         <Route exact path='/newHire' component={NewEmployeePage} />
         <Route exact path='/feedbackList' component={FeedbackList} />
-        <Route exact path='/submitTimeoff' component={SubmitTimeOffPage} />
         <Route exact path='/404page' component={NoMatch} />
         <Route exact path='/error' component={ServerError} />
+        {hrModeRedirects.map(redirect => <Redirect path={redirect} to='/' />)}
         <Redirect to='/404page'/>
         </Switch>
       </React.Fragment>
@@ -72,7 +71,7 @@ function App() {
       <Route exact path='/submitTimeoff' component={SubmitTimeOffPage} />
       <Route exact path='/404page' component={NoMatch} />
       <Route exact path='/error' component={ServerError} />
-      {redirects.map(redirect => <Redirect path={redirect} to='/' />)}
+      {employeeModeRedirects.map(redirect => <Redirect path={redirect} to='/' />)}
       <Redirect to='/404page'/>
       </Switch>
     </React.Fragment>
