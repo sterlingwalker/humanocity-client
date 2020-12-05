@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Humanocity - A Human Resources Webapp
 
-## Available Scripts
+*Oakland University - CSI 2999 - Sophomore Project - Fall 2020*
 
-In the project directory, you can run:
+![](media/icon.png) 
 
-### `npm start`
+## Application Goal
+The goal was to have an application that could be used to successfully manage the employees of a company. The application serves as a database where HR managers can view employee information and edit it as needed. HR managers would want to use this application to keep a company and its employees organized in an accessible location.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Team Members
+* Dennes Donohue ([dennes4878](https://github.com/dennes4878))
+* Alexander Jakubiak 
+* Yonatan Mankovich ([yonimn2000](https://github.com/yonimn2000))
+* Taylen Schmaltz ([SiriusVisuals](https://github.com/SiriusVisuals))
+* Sterling Walker ([sterlingwalker](https://github.com/sterlingwalker))
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## References
+* Backend code for this project: [humanocity-server](https://github.com/sterlingwalker/humanocity-server)
+* React Framework was used as the front-end framework: [reactjs.org](https://reactjs.org)
+* MaterialUI components were used for the user interface of the application: [material-ui.com](https://material-ui.com)
+* Material Table was used for the table components in the UI: [material-table.com](https://material-table.com)
+* Spring was used as the backend framework: [spring.io](https://spring.io)
+* AI generated photos of people: [generated.photos](https://generated.photos)
+* Home page icons: [iconmonstr.com](https://iconmonstr.com/)
 
-### `npm test`
+**Please note that all names, addresses, positions, salaries, photos, in this app are fictitious. Any similarity to actual persons, living or dead, is purely coincidental.**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+### HR View
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Home Page
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![](media/main.png) 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Time Off Requests Page
 
-### `npm run eject`
+![](media/timeoffs.png) 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Employee Management Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](media/employees.png) 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Employee Details Page
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![](media/employee.png) 
 
-## Learn More
+#### Add Employee Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![](media/new-employee.png) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Schedule Page
 
-### Code Splitting
+![](media/schedule.png) 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### Feedback Page
 
-### Analyzing the Bundle Size
+![](media/feedback.png) 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Employee View
 
-### Making a Progressive Web App
+#### Home Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![](media/employee-view.png) 
 
-### Advanced Configuration
+#### Time Off Request Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+![](media/new-timeoff.png) 
 
-### Deployment
+#### Feedback Submission Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![](media/new-feedback.png) 
