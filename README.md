@@ -23,6 +23,8 @@ The goal was to have an application that could be used to successfully manage th
 * AI generated photos of people: [generated.photos](https://generated.photos)
 * Home page icons: [iconmonstr.com](https://iconmonstr.com/)
 
+**Please note that all names, addresses, positions, salaries, photos, in this app are fictitious. Any similarity to actual persons, living or dead, is purely coincidental.**
+
 ## Screenshots
 
 ### HR View
